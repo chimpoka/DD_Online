@@ -24,7 +24,7 @@ public class SkillContainer
     private static Skill parseJson(JSONNode json, SkillName skillName)
     {
         SkillType type = SkillType.Default;
-        Team targetTeam = Team.Default;
+        TargetTeam targetTeam = TargetTeam.Default;
         int value;
         
     
@@ -33,7 +33,7 @@ public class SkillContainer
             if (_type.ToString() == json["Type"]) type = _type;
         }
 
-        foreach (Team _targetTeam in (Team[])Enum.GetValues(typeof(SkillType)))
+        foreach (TargetTeam _targetTeam in (TargetTeam[])Enum.GetValues(typeof(SkillType)))
         {
             if (_targetTeam.ToString() == json["Team"]) targetTeam = _targetTeam;
         }

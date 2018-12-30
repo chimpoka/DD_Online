@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HeroSelector : MonoBehaviour
+public class HeroTurnStateSelector : MonoBehaviour
 {
     public SpriteRenderer[] spriteRenderers1;
     public SpriteRenderer[] spriteRenderers2;
@@ -15,13 +15,13 @@ public class HeroSelector : MonoBehaviour
         spriteRenderers[1] = spriteRenderers2;
     }
 
-    public static void setSelector(Hero hero, int team)
+    public static void setSelector(Hero hero)
     {
          if (hero.turnState == TurnState.Undone)
-             spriteRenderers[team - 1][hero.position - 1].color = Color.black;
+             spriteRenderers[(int)hero.team][hero.position - 1].color = Color.black;
          else if (hero.turnState == TurnState.Done)
-             spriteRenderers[team - 1][hero.position - 1].color = Color.red;
+             spriteRenderers[(int)hero.team][hero.position - 1].color = Color.red;
          else if (hero.turnState == TurnState.InProcess)
-             spriteRenderers[team - 1][hero.position - 1].color = Color.green;
+             spriteRenderers[(int)hero.team][hero.position - 1].color = Color.green;
     }
 }

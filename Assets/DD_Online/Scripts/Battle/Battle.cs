@@ -1,129 +1,67 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-public enum BattleState { HeroSelection, SkillUsing, PlayerTurn, AITurn }
 
 public class Battle : MonoBehaviour
 {
     public Transform[] skillPoints1;
     public Transform[] skillPoints2;
-    private GameObject[,] skillPrefabs;
+    [HideInInspector]
+    public GameObject[][] skillPrefabs;
 
     public Transform[] heroPoints1;
     public Transform[] heroPoints2;
-    private GameObject[] heroPrefabs;
+    [HideInInspector]
+    public GameObject[][] heroPrefabs;
+
+    public BoxCollider2D[] heroColliders1;
+    public BoxCollider2D[] heroColliders2;
+
+    public Transform[] selectedHeroPoints1;
+    public Transform[] selectedHeroPoints2;
+    public Transform[][] selectedHeroPoints;
+    public GameObject[] heroSelectorPrefabs;
 
     public List<Hero> heroesTeam1;
     public List<Hero> heroesTeam2;
-    private List<Hero> heroes;
+    [HideInInspector]
+    public List<Hero> heroes;
 
-    private Hero currentHero;
-    private int playerID1;
-    private int playerID2;
+    [HideInInspector]
+    public Hero currentHero;
+    [HideInInspector]
+    public int playerID1;
+    [HideInInspector]
+    public int playerID2;
 
-    // Battle sequence
-    private BattleState battleState;
+    public BattleState battleState;
 
 
 
     void Start()
     {
-        battleState = BattleState.HeroSelection;
+        battleState = new BattleState_HeroSelection(this);
 
-        if (checkOwners(heroesTeam1, heroesTeam2) == false)
-            Debug.LogError("checkOwners failed!");
+        //if (checkOwners(heroesTeam1, heroesTeam2) == false)
+        //    Debug.LogError("checkOwners failed!");
 
+        createSelectedHeroPoints();
         createSkillPrefabs();
         createHeroesPrefabs();
     }
 
     void Update()
     {
-        if (battleState == BattleState.HeroSelection)
-        {
-            currentHero = selectHero(heroes, currentHero);
-            foreach (Hero hero in heroesTeam1) HeroSelector.setSelector(hero, 1);
-            foreach (Hero hero in heroesTeam2) HeroSelector.setSelector(hero, 2);
-
-            int index = 0;
-            foreach (Skill skill in currentHero.skillList)
-            {
-                int team = -1;
-                if (currentHero.ownerID == playerID1) team = 0;
-                else if (currentHero.ownerID == playerID2) team = 1;
-
-                skillPrefabs[team,index].GetComponent<SpriteRenderer>().sprite =
-                    SkillSpritesContainer.getSprite("Skill_" + skill.skillName.ToString());
-
-                index++;
-            }
-
-            battleState = BattleState.PlayerTurn;
-        }
-        else if (battleState == BattleState.PlayerTurn)
-        {
-            // enable skill switching
-            // target selection
-            if (Input.GetKeyDown(KeyCode.Space))
-                battleState = BattleState.SkillUsing;
-        }
-        else if (battleState == BattleState.SkillUsing)
-        {
-
-
-            battleState = BattleState.HeroSelection;
-        }
+        battleState.execute();
     }
 
 
-
-
-
-    private Hero selectHero(List<Hero> heroList, Hero currentHero)
+    private void createSelectedHeroPoints()
     {
-        if (heroList.Count == 0)
-        {
-            Debug.Log("selectHero | heroList.Count == 0");
-            return null;
-        }
-
-        if (currentHero != null && currentHero.turnState == TurnState.InProcess)
-            currentHero.turnState = TurnState.Done;
-
-        Hero nextHero = new Hero();
-        int speed = -100;
-
-        foreach (Hero hero in heroList)
-        {
-            if (hero.turnState == TurnState.Undone)
-            {
-                if (hero.speed >= speed)
-                {
-                    nextHero = hero;
-                    speed = hero.speed;
-                }
-            }
-        }
-
-        if (nextHero == null)
-        {
-            Debug.Log("NULL");
-            startNewRound(heroList, currentHero);
-            nextHero = selectHero(heroList, currentHero);
-        }
-        else nextHero.turnState = TurnState.InProcess;
-
-        return nextHero;
-    }
-
-    private void startNewRound(List<Hero> heroList, Hero currentHero)
-    {
-        foreach (Hero hero in heroList)
-        {
-            hero.turnState = TurnState.Undone;
-          //  currentHero = null;
-        }
+        selectedHeroPoints = new Transform[2][];
+        selectedHeroPoints[0] = selectedHeroPoints1;
+        selectedHeroPoints[1] = selectedHeroPoints2;
     }
 
     private bool checkOwners(List<Hero> heroes1, List<Hero> heroes2)
@@ -153,38 +91,80 @@ public class Battle : MonoBehaviour
     }
 
 
+
     private void createSkillPrefabs()
     {
-        skillPrefabs = new GameObject[2,4];
+        skillPrefabs = new GameObject[2][];
+        GameObject[] prefabs1 = new GameObject[4];
+        GameObject[] prefabs2 = new GameObject[4];
+
         for (int i = 0; i < 4; ++i)
         {
-            skillPrefabs[0,i] = Instantiate(Resources.Load("Prefabs/SkillPrefab") as GameObject,
+            prefabs1[i] = Instantiate(Resources.Load("Prefabs/SkillPrefab") as GameObject,
                    skillPoints1[i].position, Quaternion.identity) as GameObject;
-            skillPrefabs[1,i] = Instantiate(Resources.Load("Prefabs/SkillPrefab") as GameObject,
+            prefabs2[i] = Instantiate(Resources.Load("Prefabs/SkillPrefab") as GameObject,
                    skillPoints2[i].position, Quaternion.identity) as GameObject;
+
+            //skillPrefabs[0][i] = Instantiate(Resources.Load("Prefabs/SkillPrefab") as GameObject,
+            //       skillPoints1[i].position, Quaternion.identity) as GameObject;
+            //skillPrefabs[1][i] = Instantiate(Resources.Load("Prefabs/SkillPrefab") as GameObject,
+            //       skillPoints2[i].position, Quaternion.identity) as GameObject;
         }
+
+        skillPrefabs[0] = prefabs1;
+        skillPrefabs[1] = prefabs2;
     }
+
+
 
     private void createHeroesPrefabs()
     {
-        heroPrefabs = new GameObject[8];
+        heroPrefabs = new GameObject[2][];
+        GameObject[] prefabs1 = new GameObject[4];
+        GameObject[] prefabs2 = new GameObject[4];
+
         heroes = new List<Hero>();
+
         foreach (Hero hero in heroesTeam1)
         {
-            heroPrefabs[hero.position - 1] = Instantiate(Resources.Load("Prefabs/Heroes/Prefab_" + hero.heroClass.ToString()) as GameObject,
+            //heroPrefabs[0][hero.position - 1]
+            prefabs1[hero.position - 1] = Instantiate(Resources.Load("Prefabs/Heroes/Prefab_" + hero.heroClass.ToString()) as GameObject,
                    heroPoints1[hero.position - 1].position, Quaternion.identity) as GameObject;
 
+            hero.collider = heroColliders1[hero.position - 1];
+
+            int index = 0;
+            foreach (Skill skill in hero.skillList)
+            {
+                skill.prefab = skillPrefabs[(int)hero.team][index++];
+            }
+           
             heroes.Add(hero);
         }
+
         foreach (Hero hero in heroesTeam2)
         {
-            heroPrefabs[hero.position - 1 + 4] = Instantiate(Resources.Load("Prefabs/Heroes/Prefab_" + hero.heroClass.ToString()) as GameObject,
+            //heroPrefabs[1][hero.position - 1]
+            prefabs2[hero.position - 1] = Instantiate(Resources.Load("Prefabs/Heroes/Prefab_" + hero.heroClass.ToString()) as GameObject,
                    heroPoints2[hero.position - 1].position, Quaternion.identity) as GameObject;
 
             Vector3 rotation = new Vector3(0, 180, 0);
-            heroPrefabs[hero.position - 1 + 4].transform.eulerAngles = rotation;
+            //heroPrefabs[1][hero.position - 1].transform.eulerAngles = rotation;
+            prefabs2[hero.position - 1].transform.eulerAngles = rotation;
+
+            hero.collider = heroColliders2[hero.position - 1];
+
+            int index = 0;
+            foreach (Skill skill in hero.skillList)
+            {
+                skill.prefab = skillPrefabs[(int)hero.team][index++];
+            }
 
             heroes.Add(hero);
         }
+
+        heroPrefabs[0] = prefabs1;
+        heroPrefabs[1] = prefabs2;
     }
+
 }
