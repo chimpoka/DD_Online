@@ -10,46 +10,33 @@ public class BattleState_HeroSelection : BattleState
 
     public override void execute()
     {
-        battle.currentHero = selectHero(battle.heroes, battle.currentHero);
-        createHeroSelectorPrefabs(battle.currentHero);
-        foreach (Hero hero in battle.heroes) HeroTurnStateSelector.setSelector(hero);
+        //if (battle.currentHero != null)
+        //    battle.currentHero.enableSkills(false);
 
-        //int index = 0;
-        //foreach (Skill skill in battle.currentHero.skillList)
-        //{
-        //    //int team = -1;
-        //    //if (battle.currentHero.ownerID == battle.playerID1) team = 0;
-        //    //else if (battle.currentHero.ownerID == battle.playerID2) team = 1;
-
-        //    //battle.skillPrefabs[(int)battle.currentHero.team][index++].GetComponent<SpriteRenderer>().sprite =
-        //    //    SkillSpritesContainer.getSprite("Skill_" + skill.skillName.ToString());
-
-        //    skill.setImage();
-        //}
-
-        battle.currentHero.SetSkillImages();
+        battle.currentHero = updateTurnStates(battle.heroes, battle.currentHero);
+        unselectHeroes(battle.heroes);
+        battle.selectHero(battle.currentHero);
+        battle.createSkills(battle.currentHero);
+        
 
         battle.battleState = new BattleState_PlayerTurn(battle);
     }
 
 
 
-
-
-    private void createHeroSelectorPrefabs(Hero currentHero)
+    private void unselectHeroes(List<Hero> heroes)
     {
-        if (battle.heroSelectorPrefabs != null)
-        {
-            foreach (GameObject prefab in battle.heroSelectorPrefabs)
-                MonoBehaviour.Destroy(prefab);
-        }
-
-        battle.heroSelectorPrefabs = new GameObject[2];
-        battle.heroSelectorPrefabs[(int)currentHero.team] = MonoBehaviour.Instantiate(Resources.Load("Prefabs/HeroSelectorPrefab") as GameObject,
-                    battle.selectedHeroPoints[(int)currentHero.team][currentHero.position - 1].position, Quaternion.identity) as GameObject;
+        foreach (Hero h in heroes)
+            unselectHero(h);
     }
 
-    private Hero selectHero(List<Hero> heroList, Hero currentHero)
+    private void unselectHero(Hero hero)
+    {
+        hero.enablePointerSelector(false);
+        hero.destroySkills();
+    }
+
+    private Hero updateTurnStates(List<Hero> heroList, Hero currentHero)
     {
         if (heroList.Count == 0)
         {
@@ -57,15 +44,15 @@ public class BattleState_HeroSelection : BattleState
             return null;
         }
 
-        if (currentHero != null && currentHero.turnState == TurnState.InProcess)
-            currentHero.turnState = TurnState.Done;
+        if (currentHero != null && currentHero.TurnState == TurnStates.InProcess)
+            currentHero.TurnState = TurnStates.Done;
 
         Hero nextHero = new Hero();
         int speed = -100;
 
         foreach (Hero hero in heroList)
         {
-            if (hero.turnState == TurnState.Undone)
+            if (hero.TurnState == TurnStates.Undone)
             {
                 if (hero.speed >= speed)
                 {
@@ -78,23 +65,18 @@ public class BattleState_HeroSelection : BattleState
         if (nextHero == null)
         {
             Debug.Log("NULL");
-            startNewRound(heroList, currentHero);
-            nextHero = selectHero(heroList, currentHero);
+            startNewRound(heroList);
+            nextHero = updateTurnStates(heroList, currentHero);
         }
-        else nextHero.turnState = TurnState.InProcess;
+        else nextHero.TurnState = TurnStates.InProcess;
 
         return nextHero;
     }
 
-
-
-    private void startNewRound(List<Hero> heroList, Hero currentHero)
+    private void startNewRound(List<Hero> heroList)
     {
         foreach (Hero hero in heroList)
-        {
-            hero.turnState = TurnState.Undone;
-            //  currentHero = null;
-        }
+            hero.TurnState = TurnStates.Undone;
     }
 
 }

@@ -65,12 +65,9 @@
     <Compile Include="Assets\DD_Online\Scripts\Battle\BattleState_HeroSelection.cs" />
     <Compile Include="Assets\DD_Online\Scripts\Battle\BattleState_PlayerTurn.cs" />
     <Compile Include="Assets\DD_Online\Scripts\Battle\BattleState_UsingSkill.cs" />
-    <Compile Include="Assets\DD_Online\Scripts\Battle\HeroColliderSelector.cs" />
-    <Compile Include="Assets\DD_Online\Scripts\Battle\HeroTurnStateSelector.cs" />
     <Compile Include="Assets\DD_Online\Scripts\Battle\PlayerTurnState.cs" />
     <Compile Include="Assets\DD_Online\Scripts\Battle\PlayerTurnState_SkillNotSelected.cs" />
     <Compile Include="Assets\DD_Online\Scripts\Battle\PlayerTurnState_SkillSelected.cs" />
-    <Compile Include="Assets\DD_Online\Scripts\Battle\SkillSelector.cs" />
     <Compile Include="Assets\DD_Online\Scripts\Heroes\Hero.cs" />
     <Compile Include="Assets\DD_Online\Scripts\Monsters\Monster.cs" />
     <Compile Include="Assets\DD_Online\Scripts\PrepareToBattle.cs" />

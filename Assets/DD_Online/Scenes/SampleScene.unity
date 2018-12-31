@@ -366,6 +366,7 @@ MonoBehaviour:
   - {fileID: 1687284270}
   - {fileID: 949226432}
   - {fileID: 1730092904}
+  skillSelectorPrefabs: []
   heroPoints1:
   - {fileID: 1892187074}
   - {fileID: 1268475858}
@@ -386,21 +387,32 @@ MonoBehaviour:
   - {fileID: 934229301}
   - {fileID: 795419937}
   - {fileID: 788144038}
-  selectedHeroPoints1:
+  pointerSelectorPoints1:
   - {fileID: 594241172}
   - {fileID: 1076795338}
   - {fileID: 1222493838}
   - {fileID: 755897287}
-  selectedHeroPoints2:
+  pointerSelectorPoints2:
   - {fileID: 1771149613}
   - {fileID: 276586374}
   - {fileID: 1084067858}
   - {fileID: 1559694436}
   heroSelectorPrefabs: []
+  turnStateSelectorPoints1:
+  - {fileID: 761869745}
+  - {fileID: 233655266}
+  - {fileID: 341826278}
+  - {fileID: 904589491}
+  turnStateSelectorPoints2:
+  - {fileID: 2051692771}
+  - {fileID: 1955253978}
+  - {fileID: 331131312}
+  - {fileID: 999716417}
   heroesTeam1:
   - {fileID: 1446723244}
   - {fileID: 1834632925}
   - {fileID: 1798980038}
+  - {fileID: 421457608}
   heroesTeam2:
   - {fileID: 228917705}
   - {fileID: 2089719041}
@@ -714,8 +726,11 @@ MonoBehaviour:
   ownerID: 2
   team: 1
   position: 1
-  turnState: 1
+  prefab: {fileID: 0}
   collider: {fileID: 0}
+  isSelected: 0
+  turnStateSelector: {fileID: 0}
+  pointerSelector: {fileID: 0}
   skillNames: 00000000000000000000000001000000
   skillList: []
 --- !u!1 &233655265
@@ -1306,8 +1321,11 @@ MonoBehaviour:
   ownerID: 1
   team: 0
   position: 1
-  turnState: 0
+  prefab: {fileID: 0}
   collider: {fileID: 0}
+  isSelected: 0
+  turnStateSelector: {fileID: 0}
+  pointerSelector: {fileID: 0}
   skillNames: 00000000000000000000000000000000
   skillList: []
 --- !u!1 &447676514
@@ -1561,59 +1579,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &555322573
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 555322575}
-  - component: {fileID: 555322574}
-  m_Layer: 0
-  m_Name: HeroSelectorContainer
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &555322574
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 555322573}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f01133b4ceeb0e44e9fe0d5a490ee663, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spriteRenderers1:
-  - {fileID: 761869746}
-  - {fileID: 233655267}
-  - {fileID: 341826279}
-  - {fileID: 904589492}
-  spriteRenderers2:
-  - {fileID: 2051692772}
-  - {fileID: 1955253979}
-  - {fileID: 331131313}
-  - {fileID: 999716418}
---- !u!4 &555322575
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 555322573}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.07809758, y: 0.5207046, z: 0.12109375}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &594241171
 GameObject:
@@ -2128,7 +2093,7 @@ Transform:
   - {fileID: 390198098}
   - {fileID: 328519994}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &904589490
 GameObject:
@@ -2821,7 +2786,7 @@ Transform:
   - {fileID: 508072319}
   - {fileID: 824532735}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1446723242
 GameObject:
@@ -2876,8 +2841,11 @@ MonoBehaviour:
   ownerID: 1
   team: 0
   position: 4
-  turnState: 0
+  prefab: {fileID: 0}
   collider: {fileID: 0}
+  isSelected: 0
+  turnStateSelector: {fileID: 0}
+  pointerSelector: {fileID: 0}
   skillNames: 00000000020000000200000002000000
   skillList: []
 --- !u!1 &1559694435
@@ -2963,8 +2931,11 @@ MonoBehaviour:
   ownerID: 2
   team: 1
   position: 4
-  turnState: 0
+  prefab: {fileID: 0}
   collider: {fileID: 0}
+  isSelected: 0
+  turnStateSelector: {fileID: 0}
+  pointerSelector: {fileID: 0}
   skillNames: 01000000000000000200000002000000
   skillList: []
 --- !u!1 &1596342417
@@ -3208,55 +3179,6 @@ Transform:
   m_Father: {fileID: 158737063}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1794408042
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1794408044}
-  - component: {fileID: 1794408043}
-  m_Layer: 0
-  m_Name: SkillSpritesContainer
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1794408043
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1794408042}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 04444185c856a884e9db4a009c32bb13, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  skillSprites:
-  - {fileID: 21300000, guid: faeb15fb7a8e3b742a94ab6c950bb1d2, type: 3}
-  - {fileID: 21300000, guid: 9a81a42d3978729488fd9bd234e812a2, type: 3}
-  - {fileID: 21300000, guid: ad1ad90c1047185469b7b08550ab4a21, type: 3}
-  - {fileID: 21300000, guid: 8153546d15afd4dbeae0a3fbad5d2e67, type: 3}
-  defaultSprite: {fileID: 21300000, guid: a1d958b15d1cd4b4dbdebbe92b1bc9cb, type: 3}
---- !u!4 &1794408044
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1794408042}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.8961805, y: -1.4605179, z: -0.021017013}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1798980036
 GameObject:
   m_ObjectHideFlags: 0
@@ -3310,8 +3232,11 @@ MonoBehaviour:
   ownerID: 1
   team: 0
   position: 2
-  turnState: 0
+  prefab: {fileID: 0}
   collider: {fileID: 0}
+  isSelected: 0
+  turnStateSelector: {fileID: 0}
+  pointerSelector: {fileID: 0}
   skillNames: 01000000020000000000000002000000
   skillList: []
 --- !u!1 &1799960699
@@ -3563,8 +3488,11 @@ MonoBehaviour:
   ownerID: 1
   team: 0
   position: 3
-  turnState: 0
+  prefab: {fileID: 0}
   collider: {fileID: 0}
+  isSelected: 0
+  turnStateSelector: {fileID: 0}
+  pointerSelector: {fileID: 0}
   skillNames: 00000000010000000100000002000000
   skillList: []
 --- !u!1 &1853710636
@@ -3601,7 +3529,7 @@ Transform:
   - {fileID: 920036495}
   - {fileID: 158737063}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1892187073
 GameObject:
@@ -3904,8 +3832,11 @@ MonoBehaviour:
   ownerID: 2
   team: 1
   position: 2
-  turnState: 0
+  prefab: {fileID: 0}
   collider: {fileID: 0}
+  isSelected: 0
+  turnStateSelector: {fileID: 0}
+  pointerSelector: {fileID: 0}
   skillNames: 02000000020000000200000001000000
   skillList: []
 --- !u!1 &2124055212
@@ -3961,7 +3892,10 @@ MonoBehaviour:
   ownerID: 2
   team: 1
   position: 3
-  turnState: 0
+  prefab: {fileID: 0}
   collider: {fileID: 0}
+  isSelected: 0
+  turnStateSelector: {fileID: 0}
+  pointerSelector: {fileID: 0}
   skillNames: 02000000020000000200000002000000
   skillList: []

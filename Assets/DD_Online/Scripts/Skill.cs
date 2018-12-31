@@ -16,67 +16,59 @@ public class Skill
     public TargetTeam targetTeam;
     public bool isEnabled;
     public GameObject prefab;
+    public BoxCollider2D collider;
+    public GameObject skillSelector;
 
     public int[] possiblePosition;
     public int[] possibleTarget;
+
+
 
     public void setOwner(Hero hero)
     {
         owner = hero;
     }
 
-    public void setImage()
+    public void instantiate(Vector3 position)
     {
-        if (prefab != null)
+        if (prefab == null)
         {
-            prefab.GetComponent<SpriteRenderer>().enabled = true;
-            prefab.GetComponent<SpriteRenderer>().sprite =
-               SkillSpritesContainer.getSprite("Skill_" + skillName.ToString());
-
+            prefab = MonoBehaviour.Instantiate(Resources.Load("Prefabs/Skills/Prefab_" + skillName.ToString()) as GameObject,
+                    position, Quaternion.identity) as GameObject;
+            collider = prefab.GetComponent<BoxCollider2D>();
         }
     }
 
-    public void removeImage()
+    public void destroy()
     {
         if (prefab != null)
-            prefab.GetComponent<SpriteRenderer>().enabled = false;
+        {
+            GameObject.Destroy(prefab);
+            prefab = null;
+            collider = null;
+        }
     }
 
     public void enable(bool flag)
     {
-        isEnabled = flag;
-        prefab.GetComponent<SpriteRenderer>().enabled = true;
-        SpriteRenderer[] sprites = prefab.GetComponents<SpriteRenderer>();
-
-        foreach (SpriteRenderer sprite in sprites)
+        if (prefab != null)
         {
-            Color color = new Color();
-            color.r = sprite.color.r;
-            color.g = sprite.color.g;
-            color.b = sprite.color.b;
-            if (flag == true)
-                color.a = 1f;
-            else
-                color.a = 0.25f;
+            isEnabled = flag;
+            SpriteRenderer[] sprites = prefab.GetComponentsInChildren<SpriteRenderer>();
 
-            sprite.color = color;
+            foreach (SpriteRenderer sprite in sprites)
+            {
+                Color color = new Color();
+                color.r = sprite.color.r;
+                color.g = sprite.color.g;
+                color.b = sprite.color.b;
+                if (flag == true)
+                    color.a = 1f;
+                else
+                    color.a = 0.25f;
+
+                sprite.color = color;
+            }
         }
     }
-
-    //Skill(SkillContainer.SkillName name)
-    //{
-
-    //}
-
-    //private void Start()
-    //{
-    //    if (type == SkillType.Buff || type == SkillType.Heal)
-    //        team = Team.Player;
-    //    else
-    //        team = Team.Enemy;
-
-    //    //damage = GetComponent<Hero>().damage;
-    //}
-
-
 }

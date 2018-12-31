@@ -10,12 +10,51 @@ public class PlayerTurnState_SkillNotSelected : PlayerTurnState
 
     public override void selectHero()
     {
-        BoxCollider2D collider = (BoxCollider2D)checkHitCollider();
-        if (collider != null)
-        {
-            Hero hero = getSelectedHero(collider);
+            Hero hero = getSelectedHero();
             onSelectHero(hero);
+    }
+
+    public override void selectSkill()
+    {
+        //BoxCollider2D collider = (BoxCollider2D)checkHitCollider();
+        //if (collider != null)
+        //{
+        //    Skill skill = getSelectedSkill(collider);
+        //    onSelectSkill(skill);
+        //}
+    }
+
+
+
+    private void onSelectSkill(Skill skill)
+    {
+        if (skill != null)
+        {
+            //setSelector(hero);
+            //setSkills(hero);
         }
+    }
+
+    private Skill getSelectedSkill(BoxCollider2D collider)
+    {
+        foreach (Hero hero in playerTurn.battle.heroes)
+        {
+            if (hero.isSelected == true)
+            {
+                foreach (Skill skill in hero.skillList)
+                {
+                    if (skill.collider == collider)
+                        return skill;
+                }
+            }
+        }
+
+        return null;
+    }
+
+    private void setSkillSelector(Skill skill)
+    {
+        playerTurn.battle.skillSelectorPrefabs = new GameObject[2];
     }
 
 
@@ -26,48 +65,43 @@ public class PlayerTurnState_SkillNotSelected : PlayerTurnState
     {
         if (hero != null)
         {
-            setSelector(hero);
+            setHeroSelector(hero);
             setSkills(hero);
         }
     }
 
-
     private void setSkills(Hero hero)
     {
-        hero.SetSkillImages();
-        hero.skillList[1].enable(false);
-        hero.skillList[2].removeImage();
+        playerTurn.battle.createSkills(hero);
+
+        bool enableFlag;
+        if (hero == playerTurn.battle.currentHero)
+            enableFlag = true;
+        else
+            enableFlag = false;
+
+        hero.enableSkills(enableFlag);
     }
 
-
-    private void setSelector(Hero hero)
+    private void setHeroSelector(Hero hero)
     {
-        if (playerTurn.battle.heroSelectorPrefabs != null)
-        {
-            if (playerTurn.battle.heroSelectorPrefabs[(int)hero.team] != null)
-            {
-                Vector3 selectorPos = playerTurn.battle.selectedHeroPoints[(int)hero.team][hero.position - 1].position;
-                playerTurn.battle.heroSelectorPrefabs[(int)hero.team].transform.position = selectorPos;
-            }
-            else
-            {
-                playerTurn.battle.heroSelectorPrefabs[(int)hero.team] = MonoBehaviour.Instantiate(Resources.Load("Prefabs/HeroSelectorPrefab") as GameObject,
-                playerTurn.battle.selectedHeroPoints[(int)hero.team][hero.position - 1].position, Quaternion.identity) as GameObject;
-            }
-        }
+        playerTurn.battle.selectHero(hero);
     }
 
-    private Hero getSelectedHero(BoxCollider2D collider)
+    private Hero getSelectedHero()
     {
-        foreach (Hero hero in playerTurn.battle.heroes)
+        BoxCollider2D collider = (BoxCollider2D)checkHitCollider();
+        if (collider != null)
         {
-            if (hero.collider == collider)
-                return hero;
+            foreach (Hero hero in playerTurn.battle.heroes)
+            {
+                if (hero.collider == collider)
+                    return hero;
+            }
         }
 
         return null;
     }
-
 
     private Collider2D checkHitCollider()
     {
@@ -82,6 +116,4 @@ public class PlayerTurnState_SkillNotSelected : PlayerTurnState
 
         return null;
     }
-
-
 }
