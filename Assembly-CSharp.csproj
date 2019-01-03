@@ -71,6 +71,7 @@
     <Compile Include="Assets\DD_Online\Scripts\Heroes\Hero.cs" />
     <Compile Include="Assets\DD_Online\Scripts\Monsters\Monster.cs" />
     <Compile Include="Assets\DD_Online\Scripts\PrepareToBattle.cs" />
+    <Compile Include="Assets\DD_Online\Scripts\SceneElementsContainer.cs" />
     <Compile Include="Assets\DD_Online\Scripts\SimpleJSON.cs" />
     <Compile Include="Assets\DD_Online\Scripts\Skill.cs" />
     <Compile Include="Assets\DD_Online\Scripts\SkillContainer.cs" />

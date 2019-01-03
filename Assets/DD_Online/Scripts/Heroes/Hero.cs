@@ -25,9 +25,10 @@ public class Hero : MonoBehaviour
     private TurnStates turnState;
     public GameObject prefab;
     new public BoxCollider2D collider;
-    public bool isSelected;
-    public GameObject turnStateSelector;
-    public GameObject pointerSelector;
+    private bool isSelected;
+    public GameObject turnDoneIndicator;
+    public GameObject turnInProcessIndicator;
+    public GameObject selector;
 
     public List<SkillContainer.SkillName> skillNames;
 
@@ -43,9 +44,35 @@ public class Hero : MonoBehaviour
         set
         {
             turnState = value;
-            setTurnStateSelector(turnState);
+            setTurnDoneIndicator(turnState);
+            setTurnInProcessIndicator(turnState);
         }
     }
+
+    public bool IsSelected
+    {
+        get
+        {
+            return isSelected;
+        }
+        set
+        {
+            isSelected = value;
+
+            setSelector(isSelected);
+            if (isSelected == true)
+            {
+                instantiateSkills();
+            }
+            else
+            {
+                setSkillSelectors(false);
+                destroySkills();
+            }
+        }
+    }
+
+
 
     private void Awake()
     {
@@ -73,76 +100,126 @@ public class Hero : MonoBehaviour
             skill.enable(flag);
     }
 
-
-
-    public void createPointerSelector(Vector3 position)
+    public void setSkillSelectors(bool flag)
     {
-        if (pointerSelector == null)
-        {
-            pointerSelector = MonoBehaviour.Instantiate(Resources.Load("Prefabs/PointerSelectorPrefab") as GameObject,
-                   position, Quaternion.identity) as GameObject;
-        }
+        foreach (Skill skill in skillList)
+            skill.setSelector(false);
     }
 
-    public void enablePointerSelector(bool flag)
+    public void destroySkillSelectors()
     {
-        if (pointerSelector != null)
-        {
-            pointerSelector.GetComponent<SpriteRenderer>().enabled = flag;
-            isSelected = flag;
-        }
+        foreach (Skill skill in skillList)
+            skill.destroySelector();
     }
 
 
 
-    private void setTurnStateSelector(TurnStates turnState)
+    public void setSelected(bool flag)
     {
-        if (turnStateSelector != null)
+        IsSelected = flag;
+    }
+
+    private void setSelector(bool flag)
+    {
+        if (selector != null)
         {
-            if (TurnState == TurnStates.Undone)
-                turnStateSelector.GetComponent<SpriteRenderer>().color = Color.black;
-            else if (TurnState == TurnStates.Done)
-                turnStateSelector.GetComponent<SpriteRenderer>().color = Color.red;
-            else if (TurnState == TurnStates.InProcess)
-                turnStateSelector.GetComponent<SpriteRenderer>().color = Color.green;
+            if (flag == true)
+                selector.transform.position = prefab.transform.position + Vector3.up * 2.5f;
+
+            selector.GetComponent<SpriteRenderer>().enabled = flag;
         }
     }
 
-    public void createTurnStateSelector(Vector3 position)
+    private void instantiateSkills()
     {
-        if (turnStateSelector == null)
-        {
-            turnStateSelector = MonoBehaviour.Instantiate(Resources.Load("Prefabs/TurnStateSelectorPrefab") as GameObject,
-                    position, Quaternion.identity) as GameObject;
+        int index = 0;
+        foreach (Skill skill in skillList)
+            skill.instantiate(SceneElementsContainer.skillTransforms[(int)team][index++].position);
 
-            TurnState = TurnStates.Undone;
+        if (turnState == TurnStates.InProcess)
+            enableSkills(true);
+        else
+            enableSkills(false);
+    }
+
+
+
+    private void setTurnDoneIndicator(TurnStates turnState)
+    {
+        if (TurnState == TurnStates.Undone)
+            enableTurnDoneIndicator(false);
+        else if (TurnState == TurnStates.Done)
+            enableTurnDoneIndicator(true);
+        else if (TurnState == TurnStates.InProcess)
+            enableTurnDoneIndicator(false);
+    }
+
+    private void enableTurnDoneIndicator(bool flag)
+    {
+        if (turnDoneIndicator == null && flag == true)
+        {
+            turnDoneIndicator = MonoBehaviour.Instantiate(Resources.Load("Prefabs/TurnDoneIndicatorPrefab") as GameObject,
+                    SceneElementsContainer.turnStateIndicatorTransforms[(int)team][position - 1].position + Vector3.right * 0.5f, Quaternion.identity) as GameObject;
+        }
+        else if (turnDoneIndicator != null)
+        {
+            turnDoneIndicator.GetComponent<SpriteRenderer>().enabled = flag;
+        }
+    }
+
+    private void setTurnInProcessIndicator(TurnStates turnState)
+    {
+        if (TurnState == TurnStates.Undone)
+            enableTurnInProcessIndicator(false);
+        else if (TurnState == TurnStates.Done)
+            enableTurnInProcessIndicator(false);
+        else if (TurnState == TurnStates.InProcess)
+            enableTurnInProcessIndicator(true);
+    }
+
+    private void enableTurnInProcessIndicator(bool flag)
+    {
+        if (turnInProcessIndicator != null)
+        {
+            if (flag == true)
+                turnInProcessIndicator.transform.position = 
+                    SceneElementsContainer.turnStateIndicatorTransforms[(int)team][position - 1].position;
+
+            turnInProcessIndicator.GetComponent<SpriteRenderer>().enabled = flag;
         }
     }
 
 
 
-    public void instantiate(Vector3 position)
+    public void instantiate()
     {
         if (prefab == null)
         {
             prefab = MonoBehaviour.Instantiate(Resources.Load("Prefabs/Heroes/Prefab_" + heroClass.ToString()) as GameObject,
-                    position, Quaternion.identity) as GameObject;
-            collider = prefab.GetComponent<BoxCollider2D>();
+                    SceneElementsContainer.heroTransforms[(int)team][position - 1].position, Quaternion.identity) as GameObject;
+
+            if (team == Team.Right)
+            {
+                Vector3 rotation = new Vector3(0, 180, 0);
+                prefab.transform.eulerAngles = rotation;
+            }
+
+            collider = SceneElementsContainer.heroColliders[(int)team][position - 1];
         }
     }
 
-    public void setCollider(BoxCollider2D collider)
-    {
-        this.collider = collider;
-    }
+    //public void setCollider(BoxCollider2D collider)
+    //{
+    //    this.collider = collider;
+    //}
 
 
 
 
-    void UseSkill(Skill skill)
-    {
+    //void UseSkill(Skill skill)
+    //{
 
-    }
+    //}
 
     //List<Skill> GetSkills()
     //{

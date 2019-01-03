@@ -356,68 +356,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8faf55fe2b5c7074bada38ab4fd3a565, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skillPoints1:
-  - {fileID: 1901128427}
-  - {fileID: 954427138}
-  - {fileID: 1830937218}
-  - {fileID: 275716685}
-  skillPoints2:
-  - {fileID: 1686055366}
-  - {fileID: 1687284270}
-  - {fileID: 949226432}
-  - {fileID: 1730092904}
-  skillSelectorPrefabs: []
-  heroPoints1:
-  - {fileID: 1892187074}
-  - {fileID: 1268475858}
-  - {fileID: 1895528847}
-  - {fileID: 1829277900}
-  heroPoints2:
-  - {fileID: 209013125}
-  - {fileID: 212874990}
-  - {fileID: 180969419}
-  - {fileID: 1596342418}
-  heroColliders1:
-  - {fileID: 277017951}
-  - {fileID: 447676516}
-  - {fileID: 1733107017}
-  - {fileID: 1814736006}
-  heroColliders2:
-  - {fileID: 18216489}
-  - {fileID: 934229301}
-  - {fileID: 795419937}
-  - {fileID: 788144038}
-  pointerSelectorPoints1:
-  - {fileID: 594241172}
-  - {fileID: 1076795338}
-  - {fileID: 1222493838}
-  - {fileID: 755897287}
-  pointerSelectorPoints2:
-  - {fileID: 1771149613}
-  - {fileID: 276586374}
-  - {fileID: 1084067858}
-  - {fileID: 1559694436}
-  heroSelectorPrefabs: []
-  turnStateSelectorPoints1:
-  - {fileID: 761869745}
-  - {fileID: 233655266}
-  - {fileID: 341826278}
-  - {fileID: 904589491}
-  turnStateSelectorPoints2:
-  - {fileID: 2051692771}
-  - {fileID: 1955253978}
-  - {fileID: 331131312}
-  - {fileID: 999716417}
-  heroesTeam1:
-  - {fileID: 1446723244}
-  - {fileID: 1834632925}
-  - {fileID: 1798980038}
-  - {fileID: 421457608}
-  heroesTeam2:
-  - {fileID: 228917705}
-  - {fileID: 2089719041}
-  - {fileID: 2124055214}
-  - {fileID: 1581854186}
   heroes: []
   currentHero: {fileID: 0}
   playerID1: 0
@@ -434,7 +372,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &137151588
 GameObject:
@@ -728,9 +666,9 @@ MonoBehaviour:
   position: 1
   prefab: {fileID: 0}
   collider: {fileID: 0}
-  isSelected: 0
-  turnStateSelector: {fileID: 0}
-  pointerSelector: {fileID: 0}
+  turnDoneIndicator: {fileID: 0}
+  turnInProcessIndicator: {fileID: 0}
+  selector: {fileID: 0}
   skillNames: 00000000000000000000000001000000
   skillList: []
 --- !u!1 &233655265
@@ -1323,9 +1261,9 @@ MonoBehaviour:
   position: 1
   prefab: {fileID: 0}
   collider: {fileID: 0}
-  isSelected: 0
-  turnStateSelector: {fileID: 0}
-  pointerSelector: {fileID: 0}
+  turnDoneIndicator: {fileID: 0}
+  turnInProcessIndicator: {fileID: 0}
+  selector: {fileID: 0}
   skillNames: 00000000000000000000000000000000
   skillList: []
 --- !u!1 &447676514
@@ -2093,7 +2031,7 @@ Transform:
   - {fileID: 390198098}
   - {fileID: 328519994}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &904589490
 GameObject:
@@ -2786,7 +2724,7 @@ Transform:
   - {fileID: 508072319}
   - {fileID: 824532735}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1446723242
 GameObject:
@@ -2843,9 +2781,9 @@ MonoBehaviour:
   position: 4
   prefab: {fileID: 0}
   collider: {fileID: 0}
-  isSelected: 0
-  turnStateSelector: {fileID: 0}
-  pointerSelector: {fileID: 0}
+  turnDoneIndicator: {fileID: 0}
+  turnInProcessIndicator: {fileID: 0}
+  selector: {fileID: 0}
   skillNames: 00000000020000000200000002000000
   skillList: []
 --- !u!1 &1559694435
@@ -2933,9 +2871,9 @@ MonoBehaviour:
   position: 4
   prefab: {fileID: 0}
   collider: {fileID: 0}
-  isSelected: 0
-  turnStateSelector: {fileID: 0}
-  pointerSelector: {fileID: 0}
+  turnDoneIndicator: {fileID: 0}
+  turnInProcessIndicator: {fileID: 0}
+  selector: {fileID: 0}
   skillNames: 01000000000000000200000002000000
   skillList: []
 --- !u!1 &1596342417
@@ -3234,9 +3172,9 @@ MonoBehaviour:
   position: 2
   prefab: {fileID: 0}
   collider: {fileID: 0}
-  isSelected: 0
-  turnStateSelector: {fileID: 0}
-  pointerSelector: {fileID: 0}
+  turnDoneIndicator: {fileID: 0}
+  turnInProcessIndicator: {fileID: 0}
+  selector: {fileID: 0}
   skillNames: 01000000020000000000000002000000
   skillList: []
 --- !u!1 &1799960699
@@ -3490,9 +3428,9 @@ MonoBehaviour:
   position: 3
   prefab: {fileID: 0}
   collider: {fileID: 0}
-  isSelected: 0
-  turnStateSelector: {fileID: 0}
-  pointerSelector: {fileID: 0}
+  turnDoneIndicator: {fileID: 0}
+  turnInProcessIndicator: {fileID: 0}
+  selector: {fileID: 0}
   skillNames: 00000000010000000100000002000000
   skillList: []
 --- !u!1 &1853710636
@@ -3529,7 +3467,7 @@ Transform:
   - {fileID: 920036495}
   - {fileID: 158737063}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1892187073
 GameObject:
@@ -3700,6 +3638,99 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &2021597978
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2021597980}
+  - component: {fileID: 2021597979}
+  m_Layer: 0
+  m_Name: SceneElementsContainer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2021597979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2021597978}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 571d81ca81b1c9443970e6dc9c057cd0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  skillTransforms1:
+  - {fileID: 1901128427}
+  - {fileID: 954427138}
+  - {fileID: 1830937218}
+  - {fileID: 275716685}
+  skillTransforms2:
+  - {fileID: 1686055366}
+  - {fileID: 1687284270}
+  - {fileID: 949226432}
+  - {fileID: 1730092904}
+  heroTransforms1:
+  - {fileID: 1892187074}
+  - {fileID: 1268475858}
+  - {fileID: 1895528847}
+  - {fileID: 1829277900}
+  heroTransforms2:
+  - {fileID: 209013125}
+  - {fileID: 212874990}
+  - {fileID: 180969419}
+  - {fileID: 1596342418}
+  heroColliders1:
+  - {fileID: 277017951}
+  - {fileID: 447676516}
+  - {fileID: 1733107017}
+  - {fileID: 1814736006}
+  heroColliders2:
+  - {fileID: 18216489}
+  - {fileID: 934229301}
+  - {fileID: 795419937}
+  - {fileID: 788144038}
+  turnStateIndicatorTransforms1:
+  - {fileID: 761869745}
+  - {fileID: 233655266}
+  - {fileID: 341826278}
+  - {fileID: 904589491}
+  turnStateIndicatorTransforms2:
+  - {fileID: 2051692771}
+  - {fileID: 1955253978}
+  - {fileID: 331131312}
+  - {fileID: 999716417}
+  heroesTeam1:
+  - {fileID: 1446723244}
+  - {fileID: 1834632925}
+  - {fileID: 1798980038}
+  - {fileID: 421457608}
+  heroesTeam2:
+  - {fileID: 228917705}
+  - {fileID: 2089719041}
+  - {fileID: 2124055214}
+  - {fileID: 1581854186}
+--- !u!4 &2021597980
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2021597978}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.032784253, y: 0.23984325, z: 0.09013047}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2051692770
 GameObject:
   m_ObjectHideFlags: 0
@@ -3834,9 +3865,9 @@ MonoBehaviour:
   position: 2
   prefab: {fileID: 0}
   collider: {fileID: 0}
-  isSelected: 0
-  turnStateSelector: {fileID: 0}
-  pointerSelector: {fileID: 0}
+  turnDoneIndicator: {fileID: 0}
+  turnInProcessIndicator: {fileID: 0}
+  selector: {fileID: 0}
   skillNames: 02000000020000000200000001000000
   skillList: []
 --- !u!1 &2124055212
@@ -3894,8 +3925,8 @@ MonoBehaviour:
   position: 3
   prefab: {fileID: 0}
   collider: {fileID: 0}
-  isSelected: 0
-  turnStateSelector: {fileID: 0}
-  pointerSelector: {fileID: 0}
+  turnDoneIndicator: {fileID: 0}
+  turnInProcessIndicator: {fileID: 0}
+  selector: {fileID: 0}
   skillNames: 02000000020000000200000002000000
   skillList: []

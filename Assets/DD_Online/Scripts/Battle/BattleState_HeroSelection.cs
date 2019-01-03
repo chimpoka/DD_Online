@@ -10,31 +10,18 @@ public class BattleState_HeroSelection : BattleState
 
     public override void execute()
     {
-        //if (battle.currentHero != null)
-        //    battle.currentHero.enableSkills(false);
-
         battle.currentHero = updateTurnStates(battle.heroes, battle.currentHero);
-        unselectHeroes(battle.heroes);
-        battle.selectHero(battle.currentHero);
-        battle.createSkills(battle.currentHero);
-        
+
+        foreach (Hero hero in battle.heroes)
+            hero.setSelected(false);
+
+        battle.currentHero.setSelected(true);
+
 
         battle.battleState = new BattleState_PlayerTurn(battle);
     }
 
 
-
-    private void unselectHeroes(List<Hero> heroes)
-    {
-        foreach (Hero h in heroes)
-            unselectHero(h);
-    }
-
-    private void unselectHero(Hero hero)
-    {
-        hero.enablePointerSelector(false);
-        hero.destroySkills();
-    }
 
     private Hero updateTurnStates(List<Hero> heroList, Hero currentHero)
     {

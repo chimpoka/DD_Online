@@ -17,7 +17,8 @@ public class Skill
     public bool isEnabled;
     public GameObject prefab;
     public BoxCollider2D collider;
-    public GameObject skillSelector;
+    public GameObject selector;
+    public bool isSelected;
 
     public int[] possiblePosition;
     public int[] possibleTarget;
@@ -70,5 +71,27 @@ public class Skill
                 sprite.color = color;
             }
         }
+    }
+
+
+
+    public void setSelector(bool flag)
+    {
+        if (selector == null && flag == true)
+        {
+            selector = MonoBehaviour.Instantiate(Resources.Load("Prefabs/SkillSelectorPrefab") as GameObject,
+                   prefab.transform.position, Quaternion.identity) as GameObject;
+        }
+        else if (selector != null)
+        {
+            selector.GetComponent<SpriteRenderer>().enabled = flag;
+            isSelected = flag;
+        }
+    }
+
+    public void destroySelector()
+    {
+        GameObject.Destroy(selector);
+        selector = null;
     }
 }
