@@ -10,6 +10,7 @@ public class BattleState_HeroSelection : BattleState
 
     public override void execute()
     {
+        disableSkillSelector();
         battle.currentHero = updateTurnStates(battle.heroes, battle.currentHero);
 
         foreach (Hero hero in battle.heroes)
@@ -22,6 +23,22 @@ public class BattleState_HeroSelection : BattleState
     }
 
 
+
+
+    private void disableSkillSelector()
+    {
+        foreach (Hero hero in battle.heroes)
+        {
+            foreach (Skill skill in hero.skillList)
+            {
+                if (skill.IsSelected == true)
+                {
+                    battle.selectSkill(skill, false);
+                    return;
+                }
+            }
+        }
+    }
 
     private Hero updateTurnStates(List<Hero> heroList, Hero currentHero)
     {

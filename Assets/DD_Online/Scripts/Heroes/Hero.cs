@@ -61,14 +61,9 @@ public class Hero : MonoBehaviour
 
             setSelector(isSelected);
             if (isSelected == true)
-            {
                 instantiateSkills();
-            }
             else
-            {
-                setSkillSelectors(false);
                 destroySkills();
-            }
         }
     }
 
@@ -88,6 +83,18 @@ public class Hero : MonoBehaviour
 
 
 
+    private void instantiateSkills()
+    {
+        int index = 0;
+        foreach (Skill skill in skillList)
+            skill.instantiate(SceneElementsContainer.skillTransforms[(int)team][index++].position);
+
+        if (turnState == TurnStates.InProcess)
+            enableSkills(true);
+        else
+            enableSkills(false);
+    }
+
     public void destroySkills()
     {
         foreach (Skill skill in skillList)
@@ -98,18 +105,6 @@ public class Hero : MonoBehaviour
     {
         foreach (Skill skill in skillList)
             skill.enable(flag);
-    }
-
-    public void setSkillSelectors(bool flag)
-    {
-        foreach (Skill skill in skillList)
-            skill.setSelector(false);
-    }
-
-    public void destroySkillSelectors()
-    {
-        foreach (Skill skill in skillList)
-            skill.destroySelector();
     }
 
 
@@ -128,18 +123,6 @@ public class Hero : MonoBehaviour
 
             selector.GetComponent<SpriteRenderer>().enabled = flag;
         }
-    }
-
-    private void instantiateSkills()
-    {
-        int index = 0;
-        foreach (Skill skill in skillList)
-            skill.instantiate(SceneElementsContainer.skillTransforms[(int)team][index++].position);
-
-        if (turnState == TurnStates.InProcess)
-            enableSkills(true);
-        else
-            enableSkills(false);
     }
 
 
@@ -207,11 +190,6 @@ public class Hero : MonoBehaviour
             collider = SceneElementsContainer.heroColliders[(int)team][position - 1];
         }
     }
-
-    //public void setCollider(BoxCollider2D collider)
-    //{
-    //    this.collider = collider;
-    //}
 
 
 

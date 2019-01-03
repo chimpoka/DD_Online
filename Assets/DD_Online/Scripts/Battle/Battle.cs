@@ -20,6 +20,9 @@ public class Battle : MonoBehaviour
 
     //public List<Hero> heroesTeam1;
     //public List<Hero> heroesTeam2;
+
+    private GameObject skillSelector;
+
     [HideInInspector]
     public List<Hero> heroes;
 
@@ -39,6 +42,7 @@ public class Battle : MonoBehaviour
         heroes = SceneElementsContainer.heroes;
         createHeroes();
         createHeroSelectorPrefabs();
+        createSkillSelectorPrefab();
         createTurnInProcessIndicatorPrefab();
 
         battleState = new BattleState_HeroSelection(this);
@@ -61,12 +65,22 @@ public class Battle : MonoBehaviour
         hero.setSelected(true);
     }
 
-    public void selectSkill(Skill skill)
+    public void selectSkill(Skill skill, bool enableFlag = true)
     {
-        foreach (Skill s in skill.owner.skillList)
-            s.setSelector(false);
+        if (enableFlag == true)
+        {
+            foreach (Skill s in skill.owner.skillList)
+                s.setSelected(false);
+        }
+      
+        skill.setSelected(enableFlag);
+        setSkillSelector(skill, enableFlag);
+    }
 
-        skill.setSelector(true);
+    private void setSkillSelector(Skill skill, bool flag)
+    {
+        skillSelector.transform.position = skill.prefab.transform.position;
+        skillSelector.GetComponent<SpriteRenderer>().enabled = flag;
     }
 
 
@@ -102,5 +116,12 @@ public class Battle : MonoBehaviour
 
         foreach (Hero hero in heroes)
             hero.turnInProcessIndicator = indicator;
+    }
+
+    private void createSkillSelectorPrefab()
+    {
+        skillSelector = MonoBehaviour.Instantiate(Resources.Load("Prefabs/SkillSelectorPrefab") as GameObject,
+               Vector3.zero, Quaternion.identity) as GameObject;
+        skillSelector.GetComponent<SpriteRenderer>().enabled = false;
     }
 }

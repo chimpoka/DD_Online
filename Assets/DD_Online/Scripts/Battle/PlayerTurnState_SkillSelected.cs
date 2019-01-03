@@ -14,6 +14,8 @@ public class PlayerTurnState_SkillSelected : PlayerTurnState
     {
        // Hero hero = getSelectedHero();
        // onSelectHero(hero);
+       if (false)
+            playerTurn.battle.battleState = new BattleState_UsingSkill(playerTurn.battle);
     }
 
     public override void selectSkill()
@@ -34,11 +36,11 @@ public class PlayerTurnState_SkillSelected : PlayerTurnState
         {
             if (skill.isSelected == false)
             {
-                playerTurn.battle.selectSkill(skill);
+                playerTurn.battle.selectSkill(skill, true);
             }
             else
             {
-                skill.setSelector(false);
+                playerTurn.battle.selectSkill(skill, false);
                 playerTurn.playerTurnState = new PlayerTurnState_SkillNotSelected(playerTurn);
             }
         }

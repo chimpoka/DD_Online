@@ -24,6 +24,18 @@ public class Skill
     public int[] possibleTarget;
 
 
+    public bool IsSelected
+    {
+        get
+        {
+            return isSelected;
+        }
+        set
+        {
+            isSelected = value;
+        }
+    }
+
 
     public void setOwner(Hero hero)
     {
@@ -75,23 +87,8 @@ public class Skill
 
 
 
-    public void setSelector(bool flag)
+    public void setSelected(bool flag)
     {
-        if (selector == null && flag == true)
-        {
-            selector = MonoBehaviour.Instantiate(Resources.Load("Prefabs/SkillSelectorPrefab") as GameObject,
-                   prefab.transform.position, Quaternion.identity) as GameObject;
-        }
-        else if (selector != null)
-        {
-            selector.GetComponent<SpriteRenderer>().enabled = flag;
-            isSelected = flag;
-        }
-    }
-
-    public void destroySelector()
-    {
-        GameObject.Destroy(selector);
-        selector = null;
+        IsSelected = flag;
     }
 }
