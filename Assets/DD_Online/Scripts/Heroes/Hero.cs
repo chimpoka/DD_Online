@@ -21,6 +21,7 @@ public class Hero : MonoBehaviour
 
     public int ownerID;
     public Team team;
+    public Team oppositeTeam;
     public int position;
     private TurnStates turnState;
     public GameObject prefab;
@@ -29,11 +30,14 @@ public class Hero : MonoBehaviour
     public GameObject turnDoneIndicator;
     public GameObject turnInProcessIndicator;
     public GameObject selector;
+    public bool isTargeted;
 
     public List<SkillContainer.SkillName> skillNames;
 
     [HideInInspector]
     public List<Skill> skillList;
+
+
 
     public TurnStates TurnState
     {
@@ -79,6 +83,21 @@ public class Hero : MonoBehaviour
             skill.setOwner(this);
             skillList.Add(skill);
         }
+        addSkipTurnSkill();
+
+        if (team == Team.Left)
+            oppositeTeam = Team.Right;
+        else if (team == Team.Right)
+            oppositeTeam = Team.Left;
+    }
+
+    private void addSkipTurnSkill()
+    {
+        Skill skill = new Skill();
+        skill.setOwner(this);
+        skill.skillName = SkillContainer.SkillName.SkipTurn;
+        skill.usePositions = new List<int>() { 1,2,3,4 };
+        skillList.Add(skill);
     }
 
 
@@ -90,10 +109,26 @@ public class Hero : MonoBehaviour
             skill.instantiate(SceneElementsContainer.skillTransforms[(int)team][index++].position);
 
         if (turnState == TurnStates.InProcess)
-            enableSkills(true);
+        {
+            foreach (Skill skill in skillList)
+                skill.enable(checkSkillUsePosition(skill)); 
+        }
         else
             enableSkills(false);
     }
+
+    private bool checkSkillUsePosition(Skill skill)
+    {
+        foreach (int position in skill.usePositions)
+        {
+            if (position == this.position)
+                return true;
+        }
+
+        return false;
+    }
+
+
 
     public void destroySkills()
     {
@@ -123,6 +158,12 @@ public class Hero : MonoBehaviour
 
             selector.GetComponent<SpriteRenderer>().enabled = flag;
         }
+    }
+
+
+    public void setTargeted(bool flag)
+    {
+        isTargeted = flag;
     }
 
 

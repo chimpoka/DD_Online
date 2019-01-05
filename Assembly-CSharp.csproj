@@ -64,6 +64,7 @@
     <Compile Include="Assets\DD_Online\Scripts\Battle\BattleState.cs" />
     <Compile Include="Assets\DD_Online\Scripts\Battle\BattleState_HeroSelection.cs" />
     <Compile Include="Assets\DD_Online\Scripts\Battle\BattleState_PlayerTurn.cs" />
+    <Compile Include="Assets\DD_Online\Scripts\Battle\BattleState_StartBattle.cs" />
     <Compile Include="Assets\DD_Online\Scripts\Battle\BattleState_UsingSkill.cs" />
     <Compile Include="Assets\DD_Online\Scripts\Battle\PlayerTurnState.cs" />
     <Compile Include="Assets\DD_Online\Scripts\Battle\PlayerTurnState_SkillNotSelected.cs" />

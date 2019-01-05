@@ -6,8 +6,8 @@ public class BattleState_PlayerTurn : BattleState
 {
     public PlayerTurnState playerTurnState;
 
-    public BattleState_PlayerTurn(Battle battle)
-       : base(battle)
+    public BattleState_PlayerTurn(Battle battle, BattleState state)
+       : base(battle, state)
     {
         playerTurnState = new PlayerTurnState_SkillNotSelected(this);
     }
@@ -18,6 +18,6 @@ public class BattleState_PlayerTurn : BattleState
         playerTurnState.selectSkill();
 
         if (Input.GetKeyDown(KeyCode.Space))
-            battle.battleState = new BattleState_UsingSkill(battle);
+            battle.battleState = new BattleState_UsingSkill(battle, this);
     }
 }

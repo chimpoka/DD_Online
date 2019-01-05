@@ -14,7 +14,7 @@ public class PlayerTurnState_SkillNotSelected : PlayerTurnState
         {
             Hero hero = getHeroByRaycast();
             if (hero != null)
-                playerTurn.battle.selectHero(hero);
+                playerTurn.selectHero(hero);
         }
     }
 
@@ -23,8 +23,16 @@ public class PlayerTurnState_SkillNotSelected : PlayerTurnState
         if (Input.GetMouseButtonDown(0))
         {
             Skill skill = getSkillByRaycast();
-            if (skill != null && skill.owner == playerTurn.battle.currentHero)
-                playerTurn.playerTurnState = new PlayerTurnState_SkillSelected(playerTurn, skill);
+            if (skill != null && skill.isEnabled)
+            {
+                if (skill.skillName == SkillContainer.SkillName.SkipTurn)
+                    playerTurn.battle.battleState = new BattleState_UsingSkill(playerTurn.battle, playerTurn);
+                else
+                {
+                    playerTurn.selectedSkill = skill;
+                    playerTurn.playerTurnState = new PlayerTurnState_SkillSelected(playerTurn);
+                }   
+            }
         }
     }
 }

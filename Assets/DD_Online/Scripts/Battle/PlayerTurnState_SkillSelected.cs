@@ -4,18 +4,20 @@ using UnityEngine;
 
 public class PlayerTurnState_SkillSelected : PlayerTurnState
 {
-    public PlayerTurnState_SkillSelected(BattleState_PlayerTurn playerTurn, Skill skill)
+    public PlayerTurnState_SkillSelected(BattleState_PlayerTurn playerTurn)
         : base(playerTurn)
     {
-        onSelectSkill(skill);
+        onSelectSkill(playerTurn.selectedSkill);
     }
 
     public override void selectHero()
     {
-       // Hero hero = getSelectedHero();
-       // onSelectHero(hero);
-       if (false)
-            playerTurn.battle.battleState = new BattleState_UsingSkill(playerTurn.battle);
+        if (Input.GetMouseButtonDown(0))
+        {
+            Hero hero = getHeroByRaycast();
+            if (hero != null && hero.isTargeted)
+                playerTurn.battle.battleState = new BattleState_UsingSkill(playerTurn.battle, playerTurn);
+        }
     }
 
     public override void selectSkill()
@@ -32,16 +34,24 @@ public class PlayerTurnState_SkillSelected : PlayerTurnState
 
     private void onSelectSkill(Skill skill)
     {
-        if (skill != null && skill.owner == playerTurn.battle.currentHero)
+        if (skill != null)
         {
-            if (skill.isSelected == false)
+            if (skill.skillName == SkillContainer.SkillName.SkipTurn)
+                playerTurn.battle.battleState = new BattleState_UsingSkill(playerTurn.battle, playerTurn);
+
+            else if (skill.isEnabled)
             {
-                playerTurn.battle.selectSkill(skill, true);
-            }
-            else
-            {
-                playerTurn.battle.selectSkill(skill, false);
-                playerTurn.playerTurnState = new PlayerTurnState_SkillNotSelected(playerTurn);
+                if (skill.isSelected == false)
+                {
+                    playerTurn.selectSkill(skill, true);
+                    playerTurn.selectedSkill = skill;
+                }
+                else
+                {
+                    playerTurn.selectSkill(skill, false);
+                    playerTurn.selectedSkill = null;
+                    playerTurn.playerTurnState = new PlayerTurnState_SkillNotSelected(playerTurn);
+                }
             }
         }
     }

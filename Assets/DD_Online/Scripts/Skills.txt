@@ -6,24 +6,24 @@
 			"Type": "Attack",
 			"Value": 5,
 			"Team": "Enemy",
-			"Position": 1100,
-			"target": 1100
+			"TargetPositions": 1100,
+			"UsePositions": 1100
 		},
 		"StunningBlow":
 		{
 			"Type": "Attack",
 			"Value": 2,
 			"Team": "Enemy",
-			"Position": 1100,
-			"target": 1100
+			"TargetPositions": 1100,
+			"UsePositions": 1100
 		},
 		"BattleHeal":
 		{
 			"Type": "Heal",
 			"Value": 3,
-			"Team": "Player",
-			"Position": 1111,
-			"target": 1111
+			"Team": "Allied",
+			"TargetPositions": 1111,
+			"UsePositions": 1111
 		}
 	},
 
@@ -34,24 +34,136 @@
 			"Type": "Attack",
 			"Value": 5,
 			"Team": "Enemy",
-			"Position": 1100,
-			"target": 1100
+			"TargetPositions": 1100,
+			"UsePositions": 1100
 		},
 		"StunningBlow":
 		{
 			"Type": "Attack",
 			"Value": 2,
 			"Team": "Enemy",
-			"Position": 1100,
-			"target": 1100
+			"TargetPositions": 1100,
+			"UsePositions": 1100
 		},
 		"BattleHeal":
 		{
 			"Type": "Heal",
 			"Value": 3,
-			"Team": "Player",
-			"Position": 1111,
-			"target": 1111
+			"Team": "Allied",
+			"TargetPositions": 1111,
+			"UsePositions": 1111
+		}
+	},
+
+	"Hunter": 
+	{
+		"Smite":
+		{
+			"Type": "Attack",
+			"Value": 5,
+			"Team": "Enemy",
+			"TargetPositions": 1100,
+			"UsePositions": 1100
+		},
+		"StunningBlow":
+		{
+			"Type": "Attack",
+			"Value": 2,
+			"Team": "Enemy",
+			"TargetPositions": 1100,
+			"UsePositions": 1100
+		},
+		"BattleHeal":
+		{
+			"Type": "Heal",
+			"Value": 3,
+			"Team": "Allied",
+			"TargetPositions": 1111,
+			"UsePositions": 1111
+		}
+	},
+
+	"Berserk": 
+	{
+		"Smite":
+		{
+			"Type": "Attack",
+			"Value": 5,
+			"Team": "Enemy",
+			"TargetPositions": 1100,
+			"UsePositions": 1100
+		},
+		"StunningBlow":
+		{
+			"Type": "Attack",
+			"Value": 2,
+			"Team": "Enemy",
+			"TargetPositions": 1100,
+			"UsePositions": 1100
+		},
+		"BattleHeal":
+		{
+			"Type": "Heal",
+			"Value": 3,
+			"Team": "Allied",
+			"TargetPositions": 1111,
+			"UsePositions": 1111
+		}
+	},
+
+	"Fairy": 
+	{
+		"Smite":
+		{
+			"Type": "Attack",
+			"Value": 5,
+			"Team": "Enemy",
+			"TargetPositions": 1100,
+			"UsePositions": 1100
+		},
+		"StunningBlow":
+		{
+			"Type": "Attack",
+			"Value": 2,
+			"Team": "Enemy",
+			"TargetPositions": 1100,
+			"UsePositions": 1100
+		},
+		"BattleHeal":
+		{
+			"Type": "Heal",
+			"Value": 3,
+			"Team": "Allied",
+			"TargetPositions": 1111,
+			"UsePositions": 1111
+		}
+	},
+
+	"Mage": 
+	{
+		"Smite":
+		{
+			"Type": "Attack",
+			"Value": 5,
+			"Team": "Enemy",
+			"TargetPositions": 1100,
+			"UsePositions": 1100
+		},
+		"StunningBlow":
+		{
+			"Type": "Attack",
+			"Value": 2,
+			"Team": "Enemy",
+			"TargetPositions": 1100,
+			"UsePositions": 1100
+		},
+		"BattleHeal":
+		{
+			"Type": "Heal",
+			"Value": 3,
+			"Team": "Allied",
+			"TargetPositions": 1111,
+			"UsePositions": 1111
 		}
 	}
 }

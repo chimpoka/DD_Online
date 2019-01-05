@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum SkillType { Default, Attack, Heal, Buff, Debuff, Bleed, Poison, Stun }
-public enum TargetTeam { Default, Player, Enemy }
+public enum TargetTeam { Default, Allied, Enemy }
 
 [System.Serializable]
 public class Skill
@@ -20,8 +20,8 @@ public class Skill
     public GameObject selector;
     public bool isSelected;
 
-    public int[] possiblePosition;
-    public int[] possibleTarget;
+    public List<int> usePositions;
+    public List<int> targetPositions;
 
 
     public bool IsSelected
@@ -33,6 +33,8 @@ public class Skill
         set
         {
             isSelected = value;
+            if (isSelected == true)
+                startAnimation();
         }
     }
 
@@ -90,5 +92,11 @@ public class Skill
     public void setSelected(bool flag)
     {
         IsSelected = flag;
+    }
+
+    private void startAnimation()
+    {
+        Animator animator = prefab.GetComponent<Animator>();
+        if (animator != null) animator.SetTrigger("Select");
     }
 }

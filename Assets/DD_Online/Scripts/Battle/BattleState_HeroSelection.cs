@@ -4,41 +4,34 @@ using UnityEngine;
 
 public class BattleState_HeroSelection : BattleState
 {
-    public BattleState_HeroSelection(Battle battle)
-        : base(battle)
+    public BattleState_HeroSelection(Battle battle, BattleState state)
+        : base(battle, state)
     {}
 
     public override void execute()
     {
-        disableSkillSelector();
-        battle.currentHero = updateTurnStates(battle.heroes, battle.currentHero);
+       
+        if (selectedSkill != null)
+        {
+            Debug.Log("Used Skill: " + selectedSkill.skillName + ", " + selectedSkill.owner.heroClass +
+                 ", " + selectedSkill.owner.team + ", " + selectedSkill.owner.position);
 
-        foreach (Hero hero in battle.heroes)
+            selectSkill(selectedSkill, false);
+            selectedSkill = null;
+        }
+
+        currentHero = updateTurnStates(base.heroes, currentHero);
+
+        foreach (Hero hero in heroes)
             hero.setSelected(false);
 
-        battle.currentHero.setSelected(true);
+        selectHero(currentHero);
 
 
-        battle.battleState = new BattleState_PlayerTurn(battle);
+        battle.battleState = new BattleState_PlayerTurn(battle, this);
     }
 
 
-
-
-    private void disableSkillSelector()
-    {
-        foreach (Hero hero in battle.heroes)
-        {
-            foreach (Skill skill in hero.skillList)
-            {
-                if (skill.IsSelected == true)
-                {
-                    battle.selectSkill(skill, false);
-                    return;
-                }
-            }
-        }
-    }
 
     private Hero updateTurnStates(List<Hero> heroList, Hero currentHero)
     {
@@ -68,7 +61,7 @@ public class BattleState_HeroSelection : BattleState
 
         if (nextHero == null)
         {
-            Debug.Log("NULL");
+            Debug.Log("New Round");
             startNewRound(heroList);
             nextHero = updateTurnStates(heroList, currentHero);
         }

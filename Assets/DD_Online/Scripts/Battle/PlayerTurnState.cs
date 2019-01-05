@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class PlayerTurnState
 {
     public BattleState_PlayerTurn playerTurn;
-    public PlayerTurnState(BattleState_PlayerTurn playerTurn, Skill skill = null)
+    public PlayerTurnState(BattleState_PlayerTurn playerTurn)
     {
         this.playerTurn = playerTurn;
     }
@@ -15,12 +15,14 @@ public abstract class PlayerTurnState
 
 
 
+
+
     protected Skill getSkillByRaycast()
     {
         BoxCollider2D collider = (BoxCollider2D)checkHitCollider();
         if (collider != null)
         {
-            foreach (Hero hero in playerTurn.battle.heroes)
+            foreach (Hero hero in playerTurn.heroes)
             {
                 if (hero.IsSelected == true)
                 {
@@ -41,7 +43,7 @@ public abstract class PlayerTurnState
         BoxCollider2D collider = (BoxCollider2D)checkHitCollider();
         if (collider != null)
         {
-            foreach (Hero hero in playerTurn.battle.heroes)
+            foreach (Hero hero in playerTurn.heroes)
             {
                 if (hero.collider == collider)
                     return hero;
