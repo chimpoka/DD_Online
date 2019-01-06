@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public enum SkillType { Default, Attack, Heal, Buff, Debuff, Bleed, Poison, Stun }
+public enum BuffEffect { Speed, Attack, Armor }
 public enum TargetTeam { Default, Allied, Enemy }
 
 [System.Serializable]

@@ -105,16 +105,26 @@ public class Hero : MonoBehaviour
     private void instantiateSkills()
     {
         int index = 0;
-        foreach (Skill skill in skillList)
-            skill.instantiate(SceneElementsContainer.skillTransforms[(int)team][index++].position);
 
         if (turnState == TurnStates.InProcess)
         {
             foreach (Skill skill in skillList)
-                skill.enable(checkSkillUsePosition(skill)); 
+            {
+                skill.instantiate(SceneElementsContainer.skillTransforms[(int)team][index++].position);
+                skill.enable(checkSkillUsePosition(skill));
+            }
         }
         else
-            enableSkills(false);
+        {
+            foreach (Skill skill in skillList)
+            {
+                if (skill.skillName != SkillContainer.SkillName.SkipTurn)
+                {
+                    skill.instantiate(SceneElementsContainer.skillTransforms[(int)team][index++].position);
+                    skill.enable(false);
+                }
+            }
+        }
     }
 
     private bool checkSkillUsePosition(Skill skill)
