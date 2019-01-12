@@ -3,8 +3,12 @@
 	{
 		"Smite":
 		{
-			"Type": "Attack",
-			"Value": 5,
+			"Effects": 
+			{
+				{"Type": "Attack", "Value": 4, "Target": "SkillTarget" },
+				{"Type": "Poison", "Value": 2, "Duration": 4, "Target": "SkillTarget" },
+				{"Type": "Buff", "Value": 3, "Attribute": "Speed", "Target": "Self"}
+			},
 			"Team": "Enemy",
 			"TargetPositions": 1100,
 			"UsePositions": 1100

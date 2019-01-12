@@ -15,9 +15,46 @@ public class SkillContainer
 
     public static Skill getSkill(HeroClass heroClass, SkillName skillName)
     {
+        //TODO: save file once and then read it
         string SkillsJson = "Assets/DD_Online/Scripts/Skills.txt";
         var file = JSON.Parse(File.ReadAllText(SkillsJson));
+
+        parseJsonTest(file["Defender"]["Smite"], SkillName.Smite);
+
+       
+
         Skill skill = parseJson(file[heroClass.ToString()][skillName.ToString()], skillName);
+
+        return skill;
+    }
+
+    private static Skill parseJsonTest(JSONNode json, SkillName skillName)
+    {
+        List<Effect> effects = new List<Effect>();
+        //effects
+        foreach(var effectTable in json["Effects"])
+        {
+            Effect effect = new Effect();
+            effect.type = effectTable.Value["Type"];
+            effect.value = effectTable.Value["Value"];
+            effect.target = effectTable.Value["Target"];
+            effect.duration = effectTable.Value["Duration"];
+            effect.attribute = effectTable.Value["Attribute"];
+            effects.Add(effect);
+            //Debug.Log(effect.type.ToString());
+            //Debug.Log(effect.value.ToString());
+            //Debug.Log(effect.target.ToString());
+            //Debug.Log(effect.duration.ToString());
+            //Debug.Log(effect.attribute.ToString());
+        }
+
+
+
+
+        Skill skill = new Skill
+        {
+            
+        };
 
         return skill;
     }

@@ -14,8 +14,7 @@ public class BattleState_PlayerTurn : BattleState
 
     public override void execute()
     {
-        playerTurnState.selectHero();
-        playerTurnState.selectSkill();
+        playerTurnState.execute();
 
         if (Input.GetKeyDown(KeyCode.Space))
             battle.battleState = new BattleState_UsingSkill(battle, this);

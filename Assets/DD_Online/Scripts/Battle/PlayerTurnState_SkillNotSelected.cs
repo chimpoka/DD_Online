@@ -8,18 +8,17 @@ public class PlayerTurnState_SkillNotSelected : PlayerTurnState
         : base(playerTurn)
     { }
 
-    public override void selectHero()
+    public override void execute()
     {
+        // Select hero
         if (Input.GetMouseButtonDown(0))
         {
             Hero hero = getHeroByRaycast();
             if (hero != null)
                 playerTurn.selectHero(hero);
         }
-    }
 
-    public override void selectSkill()
-    {
+        // Select skill
         if (Input.GetMouseButtonDown(0))
         {
             Skill skill = getSkillByRaycast();
@@ -31,7 +30,7 @@ public class PlayerTurnState_SkillNotSelected : PlayerTurnState
                 {
                     playerTurn.selectedSkill = skill;
                     playerTurn.playerTurnState = new PlayerTurnState_SkillSelected(playerTurn);
-                }   
+                }
             }
         }
     }

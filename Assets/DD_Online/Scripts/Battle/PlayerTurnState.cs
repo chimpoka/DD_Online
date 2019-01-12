@@ -10,8 +10,7 @@ public abstract class PlayerTurnState
         this.playerTurn = playerTurn;
     }
 
-    public virtual void selectSkill() {}
-    public virtual void selectHero() {}
+    public virtual void execute() {}
 
 
 

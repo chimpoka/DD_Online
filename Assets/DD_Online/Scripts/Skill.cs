@@ -24,6 +24,9 @@ public class Skill
     public List<int> usePositions;
     public List<int> targetPositions;
 
+    public List<Effect> effects;
+
+
 
     public bool IsSelected
     {
