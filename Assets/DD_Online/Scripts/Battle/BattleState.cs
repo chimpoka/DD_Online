@@ -67,7 +67,6 @@ public abstract class BattleState
             skill.setSelected(enableFlag);
             setSkillSelector(skill, enableFlag);
             setEffectIndicators(skill, enableFlag);
-            //setHerosTargetedBySkill(skill, enableFlag);
         }
     }
 
@@ -136,29 +135,4 @@ public abstract class BattleState
 
         return null;
     }
-
-    //private void setHerosTargetedBySkill(Skill skill, bool flag)
-    //{
-    //    if (flag == true)
-    //    {
-    //        Hero.Team targetTeam = Hero.Team.Left;
-
-    //        if (skill.targetTeam == TargetTeam.Enemy)
-    //            targetTeam = skill.owner.oppositeTeam;
-    //        else if (skill.targetTeam == TargetTeam.Allied)
-    //            targetTeam = skill.owner.team;
-
-    //        foreach (int position in skill.targetPositions)
-    //        {
-    //            Hero targetHero = getHero(targetTeam, position);
-    //            if (targetHero != null)
-    //                targetHero.setTargeted(true);
-    //        }
-    //    }
-    //    else if (flag == false)
-    //    {
-    //        foreach (Hero hero in heroes)
-    //            hero.setTargeted(false);
-    //    }
-    //}
 }
