@@ -11,33 +11,47 @@ using System;
 
 public class SkillContainer
 {
-    public enum SkillName { Smite, BattleHeal, StunningBlow, SkipTurn }
+    
 
     public static Skill getSkill(HeroClass heroClass, SkillName skillName)
     {
         //TODO: save file once and then read it
         string SkillsJson = "Assets/DD_Online/Scripts/Skills.txt";
         var file = JSON.Parse(File.ReadAllText(SkillsJson));
-
-        parseJsonTest(file["Defender"]["Smite"], SkillName.Smite);
-
-       
-
-        Skill skill = parseJson(file[heroClass.ToString()][skillName.ToString()], skillName);
+        Skill skill = parseJson(file[heroClass.ToString()][skillName.ToString()], skillName, heroClass);
 
         return skill;
     }
 
-    private static Skill parseJsonTest(JSONNode json, SkillName skillName)
+ 
+
+    private static Skill parseJson(JSONNode json, SkillName skillName, HeroClass heroClass)
     {
+        SkillType type = SkillType.Default;
+        TargetTeam targetTeam = TargetTeam.Default;
+        List<int> targetPositions;
+        List<int> usePositions;
+        int value;
         List<Effect> effects = new List<Effect>();
-        //effects
-        foreach(var effectTable in json["Effects"])
+
+
+
+        // effects
+        foreach (var effectTable in json["Effects"])
         {
             Effect effect = new Effect();
-            effect.type = effectTable.Value["Type"];
+
+            foreach (SkillType _type in (SkillType[])Enum.GetValues(typeof(SkillType)))
+                if (_type.ToString() == effectTable.Value["Type"]) effect.type = _type;
+            
             effect.value = effectTable.Value["Value"];
-            effect.target = effectTable.Value["Target"];
+
+            if (effectTable.Value["Target"] == "True")
+                effect.target = true;
+            else
+                effect.target = false;
+
+
             effect.duration = effectTable.Value["Duration"];
             effect.attribute = effectTable.Value["Attribute"];
             effects.Add(effect);
@@ -48,30 +62,11 @@ public class SkillContainer
             //Debug.Log(effect.attribute.ToString());
         }
 
-
-
-
-        Skill skill = new Skill
-        {
-            
-        };
-
-        return skill;
-    }
-
-    private static Skill parseJson(JSONNode json, SkillName skillName)
-    {
-        SkillType type = SkillType.Default;
-        TargetTeam targetTeam = TargetTeam.Default;
-        List<int> targetPositions;
-        List<int> usePositions;
-        int value;
-        
-        // type
-        foreach (SkillType _type in (SkillType[])Enum.GetValues(typeof(SkillType)))
-        {
-            if (_type.ToString() == json["Type"]) type = _type;
-        }
+        //// type
+        //foreach (SkillType _type in (SkillType[])Enum.GetValues(typeof(SkillType)))
+        //{
+        //    if (_type.ToString() == json["Type"]) type = _type;
+        //}
 
         // targetTeam
         foreach (TargetTeam _targetTeam in (TargetTeam[])Enum.GetValues(typeof(TargetTeam)))
@@ -80,7 +75,7 @@ public class SkillContainer
         }
 
         //targetPositions
-        string s = json["TargetPositions"].ToString();
+        string s = json["TargetPositions"];
         targetPositions = new List<int>();
         for (int i = 0; i < s.Length; ++i)
         {
@@ -89,12 +84,23 @@ public class SkillContainer
         }
 
         //usePositions
-        s = json["TargetPositions"].ToString();
+        s = json["UsePositions"];
         usePositions = new List<int>();
         for (int i = 0; i < s.Length; ++i)
         {
+            if (heroClass == HeroClass.Priest)
+                Debug.Log("Skill: " + skillName + ";  s[i]: " + s[i]);
+
             if (s[i] == '1')
+            {
+                //Debug.Log("Skill: " + skillName + ";  usePos: " + i);
                 usePositions.Add(i + 1);
+                //if (heroClass == HeroClass.Priest)
+                //{
+                //    int j = i + 1;
+                //    Debug.Log("Skill: " + skillName + ";  usePos: " + j);
+                //}
+            }
         }
 
         // value

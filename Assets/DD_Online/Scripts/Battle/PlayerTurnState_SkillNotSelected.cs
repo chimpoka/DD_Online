@@ -24,7 +24,7 @@ public class PlayerTurnState_SkillNotSelected : PlayerTurnState
             Skill skill = getSkillByRaycast();
             if (skill != null && skill.isEnabled)
             {
-                if (skill.skillName == SkillContainer.SkillName.SkipTurn)
+                if (skill.skillName == SkillName.SkipTurn)
                     playerTurn.battle.battleState = new BattleState_UsingSkill(playerTurn.battle, playerTurn);
                 else
                 {

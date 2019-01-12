@@ -33,7 +33,7 @@ public class PlayerTurnState_SkillSelected : PlayerTurnState
 
     private void onSelectSkill(Skill skill)
     {
-        if (skill.skillName == SkillContainer.SkillName.SkipTurn)
+        if (skill.skillName == SkillName.SkipTurn)
             playerTurn.battle.battleState = new BattleState_UsingSkill(playerTurn.battle, playerTurn);
 
         else if (skill.isEnabled)

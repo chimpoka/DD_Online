@@ -5,14 +5,14 @@
 		{
 			"Effects": 
 			{
-				{"Type": "Attack", "Value": 4, "Target": "SkillTarget" },
-				{"Type": "Poison", "Value": 2, "Duration": 4, "Target": "SkillTarget" },
-				{"Type": "Buff", "Value": 3, "Attribute": "Speed", "Target": "Self"}
+				{"Type": "Attack", "Value": 4, "SelfTargeted": "False" },
+				{"Type": "Poison", "Value": 2, "Duration": 4, "SelfTargeted": "False" },
+				{"Type": "Buff", "Value": 3, "Attribute": "Speed", "SelfTargeted": "True"}
 			},
 			"Team": "Enemy",
 			"MultipleTarget": "False",
-			"TargetPositions": 1100,
-			"UsePositions": 1100
+			"TargetPositions": "1100",
+			"UsePositions": "1100"
 		},
 		"StunningBlow":
 		{
@@ -38,39 +38,37 @@
 		{
 			"Effects": 
 			{
-				{"Type": "Attack", "Value": 4, "Target": "SkillTarget" },
-				{"Type": "Poison", "Value": 2, "Duration": 4, "Target": "SkillTarget" },
-				{"Type": "Buff", "Value": 3, "Attribute": "Speed", "Target": "Self"}
+				{"Type": "Attack", "Value": 3, "SelfTargeted": "False" },
+				{"Type": "Poison", "Value": 2, "Duration": 3, "SelfTargeted": "False" },
+				{"Type": "Debuff", "Value": 3, "Attribute": "Speed", "SelfTargeted": "True"}
 			},
 			"MultipleTarget": "False",
 			"Team": "Enemy",
-			"TargetPositions": 1100,
-			"UsePositions": 1100
+			"TargetPositions": "1100",
+			"UsePositions": "1100"
 		},
 		"StunningBlow":
 		{
 			"Effects": 
 			{
-				{"Type": "Attack", "Value": 4, "Target": "SkillTarget" },
-				{"Type": "Poison", "Value": 2, "Duration": 4, "Target": "SkillTarget" },
-				{"Type": "Buff", "Value": 3, "Attribute": "Speed", "Target": "Self"}
+				{"Type": "Buff", "Value": 3, "Attribute": "Speed", "SelfTargeted": "False"}
 			},
-			"MultipleTarget": "False",
-			"Team": "Enemy",
-			"TargetPositions": 1100,
-			"UsePositions": 1100
+			"MultipleTarget": "True",
+			"Team": "Allied",
+			"TargetPositions": "1100",
+			"UsePositions": "0011"
 		},
 		"BattleHeal":
 		{
 			"Effects": 
 			{
-				{"Type": "Heal", "Value": 2, "Target": "SkillTarget" },
-				{"Type": "Buff", "Value": 1, "Attribute": "Speed", "Target": "SkillTarget"}
+				{"Type": "Heal", "Value": 1, "SelfTargeted": "False" },
+				{"Type": "Buff", "Value": 1, "Attribute": "Speed", "SelfTargeted": "False"}
 			},
 			"MultipleTarget": "True",
 			"Team": "Allied",
-			"TargetPositions": 1111,
-			"UsePositions": 1111
+			"TargetPositions": "1111",
+			"UsePositions": "0001"
 		}
 	},
 
@@ -108,39 +106,39 @@
 		{
 			"Effects": 
 			{
-				{"Type": "Attack", "Value": 6, "Target": "SkillTarget" },
-				{"Type": "Attack", "Value": 3, "Target": "Self" },
-				{"Type": "Debuff", "Value": 3, "Attribute": "Speed", "Target": "SkillTarget"}
+				{"Type": "Attack", "Value": 6, "SelfTargeted": "False" },
+				{"Type": "Attack", "Value": 4, "SelfTargeted": "True" },
+				{"Type": "Debuff", "Value": 3, "Attribute": "Speed", "SelfTargeted": "False"}
 			},
 			"MultipleTarget": "False",
 			"Team": "Enemy",
-			"TargetPositions": 1100,
-			"UsePositions": 1100
+			"TargetPositions": "1000",
+			"UsePositions": "1100"
 		},
 		"StunningBlow":
 		{
 			"Effects": 
 			{
-				{"Type": "Attack", "Value": 2, "Target": "SkillTarget" },
-				{"Type": "Bleed", "Value": 2, "Duration": "3", "Target": "SkillTarget" },
-				{"Type": "Debuff", "Value": 2, "Attribute": "Speed", "Target": "SkillTarget"}
+				{"Type": "Attack", "Value": 2, "SelfTargeted": "False" },
+				{"Type": "Bleed", "Value": 2, "Duration": "3", "SelfTargeted": "False" },
+				{"Type": "Debuff", "Value": 2, "Attribute": "Speed", "SelfTargeted": "True"}
 			},
 			"MultipleTarget": "False",
 			"Team": "Enemy",
-			"TargetPositions": 1100,
-			"UsePositions": 1100
+			"TargetPositions": "1111",
+			"UsePositions": "1100"
 		},
 		"BattleHeal":
 		{
 			"Effects": 
 			{
-				{"Type": "Heal", "Value": 3, "Target": "Self" },
-				{"Type": "Buff", "Value": 2, "Attribute": "Speed", "Target": "Self"}
+				{"Type": "Heal", "Value": 3, "SelfTargeted": "True" },
+				{"Type": "Buff", "Value": 2, "Attribute": "Speed", "SelfTargeted": "True"}
 			},
 			"MultipleTarget": "False",
 			"Team": "Allied",
 			"TargetPositions": "Self",
-			"UsePositions": 1111
+			"UsePositions": "1111"
 		}
 	},
 
@@ -150,35 +148,35 @@
 		{
 			"Effects": 
 			{
-				{"Type": "Attack", "Value": 3, "Target": "SkillTarget" },
+				{"Type": "Attack", "Value": 3, "SelfTargeted": "False" },
 			},
 			"MultipleTarget": "True",
 			"Team": "Enemy",
-			"TargetPositions": 0111,
-			"UsePositions": 1100
+			"TargetPositions": "0111",
+			"UsePositions": "1100"
 		},
 		"StunningBlow":
 		{
 			"Effects": 
 			{
-				{"Type": "Buff", "Value": 1, "Target": "SkillTarget" },
+				{"Type": "Buff", "Value": 1, "SelfTargeted": "False" },
 			},
 			"MultipleTarget": "True",
 			"Team": "Allied",
-			"TargetPositions": 1111,
-			"UsePositions": 1100
+			"TargetPositions": "1111",
+			"UsePositions": "1100"
 		},
 		"BattleHeal":
 		{
 			"Effects": 
 			{
-				{"Type": "Heal", "Value": 1, "Target": "SkillTarget" },
-				{"Type": "Buff", "Value": 1, "Attribute": "Speed", "Target": "Self" },
+				{"Type": "Heal", "Value": 1, "SelfTargeted": "False" },
+				{"Type": "Buff", "Value": 1, "Attribute": "Speed", "SelfTargeted": "True" },
 			},
 			"MultipleTarget": "True",
 			"Team": "Allied",
-			"TargetPositions": 1111,
-			"UsePositions": 1111
+			"TargetPositions": "1111",
+			"UsePositions": "1111"
 		}
 	},
 
@@ -188,37 +186,37 @@
 		{
 			"Effects": 
 			{
-				{"Type": "Attack", "Value": 1, "Target": "SkillTarget" },
-				{"Type": "Poison", "Value": 1, "Duration": "4", "Target": "SkillTarget" },
+				{"Type": "Attack", "Value": 1, "SelfTargeted": "False" },
+				{"Type": "Poison", "Value": 1, "Duration": "4", "SelfTargeted": "False" },
 			},
 			"MultipleTarget": "True",
 			"Team": "Enemy",
-			"TargetPositions": 1111,
-			"UsePositions": 1100
+			"TargetPositions": "1111",
+			"UsePositions": "1100"
 		},
 		"StunningBlow":
 		{
 			"Effects": 
 			{
-				{"Type": "Attack", "Value": 3, "Target": "SkillTarget" },
-				{"Type": "Stun", "Duration": "1", "Target": "SkillTarget" },
+				{"Type": "Attack", "Value": 3, "SelfTargeted": "False" },
+				{"Type": "Stun", "Duration": "1", "SelfTargeted": "False" },
 			},
 			"MultipleTarget": "True",
 			"Team": "Enemy",
-			"TargetPositions": 0110,
-			"UsePositions": 1100
+			"TargetPositions": "0110",
+			"UsePositions": "1110"
 		},
 		"BattleHeal":
 		{
 			"Effects": 
 			{
-				{"Type": "Heal", "Value": 1, "Target": "SkillTarget" },
-				{"Type": "Buff", "Value": 3, "Attribute": "Speed", "Target": "SkillTarget" },
+				{"Type": "Heal", "Value": 1, "SelfTargeted": "False" },
+				{"Type": "Buff", "Value": 3, "Attribute": "Speed", "SelfTargeted": "False" },
 			},
 			"MultipleTarget": "False",
 			"Team": "Allied",
-			"TargetPositions": 1111,
-			"UsePositions": 1111
+			"TargetPositions": "1111",
+			"UsePositions": "1111"
 		}
 	}
 }

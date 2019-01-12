@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum HeroClass { Defender, Priest, Hunter, Berserk, Fairy, Mage }
-public enum TurnStates { Done, Undone, InProcess }
+
 
 // TODO: Delete MonoBehaviour Inheritance
 public class Hero : MonoBehaviour
@@ -32,7 +31,7 @@ public class Hero : MonoBehaviour
     public GameObject selector;
     public bool isTargeted;
 
-    public List<SkillContainer.SkillName> skillNames;
+    public List<SkillName> skillNames;
 
     [HideInInspector]
     public List<Skill> skillList;
@@ -77,7 +76,7 @@ public class Hero : MonoBehaviour
     {
         TurnState = TurnStates.Undone;
 
-        foreach (SkillContainer.SkillName skillName in skillNames)
+        foreach (SkillName skillName in skillNames)
         {
             Skill skill = SkillContainer.getSkill(heroClass, skillName);
             skill.setOwner(this);
@@ -95,7 +94,7 @@ public class Hero : MonoBehaviour
     {
         Skill skill = new Skill();
         skill.setOwner(this);
-        skill.skillName = SkillContainer.SkillName.SkipTurn;
+        skill.skillName = SkillName.SkipTurn;
         skill.usePositions = new List<int>() { 1,2,3,4 };
         skillList.Add(skill);
     }
@@ -118,7 +117,7 @@ public class Hero : MonoBehaviour
         {
             foreach (Skill skill in skillList)
             {
-                if (skill.skillName != SkillContainer.SkillName.SkipTurn)
+                if (skill.skillName != SkillName.SkipTurn)
                 {
                     skill.instantiate(SceneElementsContainer.skillTransforms[(int)team][index++].position);
                     skill.enable(false);
@@ -129,6 +128,13 @@ public class Hero : MonoBehaviour
 
     private bool checkSkillUsePosition(Skill skill)
     {
+        //if (heroClass == HeroClass.Priest)
+        //{
+        //    Debug.Log("Skill: " + skill.skillName + ";   this.position: " + position);
+        //    foreach (int position in skill.usePositions)
+        //        Debug.Log("pos: " + position);
+        //}
+
         foreach (int position in skill.usePositions)
         {
             if (position == this.position)
