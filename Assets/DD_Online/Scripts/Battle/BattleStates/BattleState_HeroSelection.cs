@@ -10,26 +10,15 @@ public class BattleState_HeroSelection : BattleState
 
     public override void execute()
     {
-       
         if (selectedSkill != null)
-        {
-            //Debug.Log("Used Skill: " + selectedSkill.skillName + ", " + selectedSkill.owner.heroClass +
-            //     ", " + selectedSkill.owner.team + ", " + selectedSkill.owner.position);
-
             selectSkill(selectedSkill, false);
-            selectedSkill = null;
-        }
-
-        currentHero = updateTurnStates(base.heroes, currentHero);
 
         foreach (Hero hero in heroes)
             hero.setSelected(false);
-    
 
+        currentHero = updateTurnStates(base.heroes, currentHero);
         selectHero(currentHero);
-
-
-        battle.battleState = new BattleState_PlayerTurn(battle, this);
+        battle.battleState = new BattleState_TurnBeforeSkillSelected(battle, this);
     }
 
 

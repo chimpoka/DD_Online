@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5684717925237521302}
   - component: {fileID: 871243748486637841}
   m_Layer: 0
-  m_Name: Prefab_Pries2
+  m_Name: Prefab_Priest2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 690510721346025618}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.15, y: 0.15, z: 1}
+  m_LocalScale: {x: 0.14, y: 0.14, z: 1}
   m_Children:
   - {fileID: 4701000871796268550}
   m_Father: {fileID: 0}

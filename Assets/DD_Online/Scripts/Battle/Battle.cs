@@ -20,5 +20,6 @@ public class Battle : MonoBehaviour
     void Update()
     {
         battleState.execute();
+        battleState.showSkillHover();
     }
 }

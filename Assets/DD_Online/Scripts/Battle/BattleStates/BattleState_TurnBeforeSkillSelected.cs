@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerTurnState_SkillNotSelected : PlayerTurnState
-{ 
-    public PlayerTurnState_SkillNotSelected(BattleState_PlayerTurn playerTurn)
-        : base(playerTurn)
+public class BattleState_TurnBeforeSkillSelected : BattleState
+{
+    public BattleState_TurnBeforeSkillSelected(Battle battle, BattleState state)
+        : base(battle, state)
     { }
 
     public override void execute()
@@ -15,7 +15,7 @@ public class PlayerTurnState_SkillNotSelected : PlayerTurnState
         {
             Hero hero = getHeroByRaycast();
             if (hero != null)
-                playerTurn.selectHero(hero);
+                selectHero(hero);
         }
 
         // Select skill
@@ -24,11 +24,11 @@ public class PlayerTurnState_SkillNotSelected : PlayerTurnState
             Skill skill = getSkillByRaycast();
             if (skill != null && skill.isActive)
             {
-                playerTurn.selectSkill(skill);
+                selectSkill(skill);
                 if (skill.skillName == SkillName.SkipTurn)
-                    playerTurn.battle.battleState = new BattleState_UsingSkill(playerTurn.battle, playerTurn);
+                    battle.battleState = new BattleState_UsingSkill(battle, this);
                 else
-                    playerTurn.playerTurnState = new PlayerTurnState_SkillSelected(playerTurn);
+                    battle.battleState = new BattleState_TurnAfterSkillSelected(battle, this);
             }
         }
     }

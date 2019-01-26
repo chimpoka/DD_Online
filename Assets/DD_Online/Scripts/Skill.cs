@@ -14,6 +14,7 @@ public class Skill : IPointerClickHandler
     public TargetTeam targetTeam;
     public bool isActive;
     public GameObject prefab;
+    public GameObject hoverPrefab;
     public BoxCollider2D collider;
     public GameObject selector;
     public bool isSelected;
@@ -104,5 +105,26 @@ public class Skill : IPointerClickHandler
     {
         Animator animator = prefab.GetComponent<Animator>();
         if (animator != null) animator.SetTrigger("Select");
+    }
+
+
+    public void instantiateHover()
+    {
+        string fileName = "Prefabs/SkillInfo/Prefab_" + skillName.ToString();
+        Object obj = Resources.Load(fileName);
+        if (obj == null)
+            Debug.LogError("No file '" + fileName + "'!");
+        else
+            hoverPrefab = MonoBehaviour.Instantiate((obj) as GameObject,
+                prefab.transform.position - Vector3.up * 0.4f, Quaternion.identity) as GameObject;
+    }
+
+    public void destroyHover()
+    {
+        if (hoverPrefab != null)
+        {
+            GameObject.Destroy(hoverPrefab);
+            hoverPrefab = null;
+        }
     }
 }

@@ -12,12 +12,9 @@ public abstract class BattleState
     public Hero targetHero;
     public GameObject skillSelector;
     public List<GameObject> effectIndicators;
-
-    [HideInInspector]
     public List<Hero> heroes;
-
-    [HideInInspector]
     public Hero currentHero;
+    public Skill hoveredSkill;
 
 
 
@@ -32,12 +29,61 @@ public abstract class BattleState
             this.heroes = state.heroes;
             this.currentHero = state.currentHero;
             this.effectIndicators = state.effectIndicators;
+            this.hoveredSkill = state.hoveredSkill;
         }
     }
 
     
 
     public virtual void execute() {}
+    public virtual void showSkillHover()
+    {
+        Skill skill = getSkillByRaycast();
+        if (skill != null)
+        {
+            if (hoveredSkill != skill)
+            {
+                onStartHoverSkill(skill);
+                hoveredSkill = skill;
+            }
+        }
+        else
+        {
+            if (hoveredSkill != null)
+            {
+                onEndHoverSkill();
+                hoveredSkill = null;
+            }
+        }
+    }
+
+
+    private void onStartHoverSkill(Skill skill)
+    {
+        destroySkillHover();
+        createSkillHower(skill);
+    }
+
+    private void onEndHoverSkill()
+    {
+        destroySkillHover();
+    }
+
+
+
+    protected void createSkillHower(Skill skill)
+    {
+        if (skill != null)
+            skill.instantiateHover();
+    }
+
+    protected void destroySkillHover()
+    {
+        if (hoveredSkill != null)
+            hoveredSkill.destroyHover();
+    }
+
+
 
 
 
@@ -83,6 +129,10 @@ public abstract class BattleState
 
     private void setEffectIndicators(Skill skill, bool enableFlag = true)
     {
+        destroyEffectIndicators();
+        foreach (Hero hero in heroes)
+            hero.setTargeted(false);
+
         if (enableFlag == true)
         {
             if (skill.skillName == SkillName.SkipTurn)
@@ -90,9 +140,6 @@ public abstract class BattleState
 
             string prefabPath = "";
             Hero.Team targetTeam = Hero.Team.Left;
-
-            if (effectIndicators != null) destroyEffectIndicators();
-            else effectIndicators = new List<GameObject>();
 
             if (skill.targetTeam == TargetTeam.Enemy)
             {
@@ -119,6 +166,7 @@ public abstract class BattleState
                         targetHero.setTargeted(true);
                 }
             }
+            // self targeted skill
             else
             {
                 GameObject prefab = MonoBehaviour.Instantiate(Resources.Load(prefabPath) as GameObject,
@@ -128,21 +176,16 @@ public abstract class BattleState
 
                 currentHero.setTargeted(true);
             }
-
-        }
-        else if (enableFlag == false)
-        {
-            destroyEffectIndicators();
-            foreach (Hero hero in heroes)
-                hero.setTargeted(false);
         }
     }
 
     private void destroyEffectIndicators()
     {
-        foreach (GameObject prefab in effectIndicators)
-            GameObject.Destroy(prefab);
-
+        if (effectIndicators != null)
+        {
+            foreach (GameObject prefab in effectIndicators)
+                GameObject.Destroy(prefab);
+        }
         effectIndicators = new List<GameObject>();
     }
 
@@ -153,6 +196,55 @@ public abstract class BattleState
             if (hero.team == team && hero.position == position)
                 return hero;
         }
+
+        return null;
+    }
+
+
+
+    protected Skill getSkillByRaycast()
+    {
+        BoxCollider2D collider = (BoxCollider2D)checkHitCollider();
+        if (collider != null)
+        {
+            foreach (Hero hero in heroes)
+            {
+                if (hero.IsSelected == true)
+                {
+                    foreach (Skill skill in hero.skillList)
+                    {
+                        if (skill.collider == collider)
+                            return skill;
+                    }
+                }
+            }
+        }
+
+        return null;
+    }
+
+    protected Hero getHeroByRaycast()
+    {
+        BoxCollider2D collider = (BoxCollider2D)checkHitCollider();
+        if (collider != null)
+        {
+            foreach (Hero hero in heroes)
+            {
+                if (hero.collider == collider)
+                    return hero;
+            }
+        }
+
+        return null;
+    }
+
+    private Collider2D checkHitCollider()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit2D hit = Physics2D.GetRayIntersection(ray, Mathf.Infinity);
+
+        if (hit.collider != null)
+            return hit.collider;
 
         return null;
     }
