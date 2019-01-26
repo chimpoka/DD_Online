@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 
@@ -15,7 +16,10 @@ public class Hero : MonoBehaviour
 
     public HeroClass heroClass;
     public int damage;
-    public int health;
+
+    [SerializeField]
+    private int health;
+    private int maxHealth;
     public int speed;
 
     public int ownerID;
@@ -24,6 +28,7 @@ public class Hero : MonoBehaviour
     public int position;
     private TurnStates turnState;
     public GameObject prefab;
+    public Image healthBar;
     new public BoxCollider2D collider;
     private bool isSelected;
     public GameObject turnDoneIndicator;
@@ -70,7 +75,18 @@ public class Hero : MonoBehaviour
         }
     }
 
-
+    public int Health {
+        get
+        {
+            return health;
+        }
+        set
+        {
+            health = value;
+            health = Mathf.Clamp(health, 0, maxHealth);
+            updateHealthBar();
+        }
+    }
 
     private void Awake()
     {
@@ -78,7 +94,7 @@ public class Hero : MonoBehaviour
 
         foreach (SkillName skillName in skillNames)
         {
-            Skill skill = SkillContainer.getSkill(heroClass, skillName);
+            Skill skill = SkillContainer.Instance.getSkill(heroClass, skillName);
             skill.setOwner(this);
             skillList.Add(skill);
         }
@@ -88,6 +104,8 @@ public class Hero : MonoBehaviour
             oppositeTeam = Team.Right;
         else if (team == Team.Right)
             oppositeTeam = Team.Left;
+
+        maxHealth = health;
     }
 
     private void addSkipTurnSkill()
@@ -245,10 +263,20 @@ public class Hero : MonoBehaviour
             }
 
             collider = SceneElementsContainer.heroColliders[(int)team][position - 1];
+            //GameObject obj = prefab.GetComponent<>
+            RectTransform[] objects = prefab.GetComponentsInChildren<RectTransform>();
+            foreach (RectTransform obj in objects)
+            {
+                if (obj.name == "HealthBar")
+                    healthBar = obj.GetComponent<Image>();
+            }
         }
     }
 
-
+    private void updateHealthBar()
+    {
+        healthBar.fillAmount = Mathf.InverseLerp(0, maxHealth, health);
+    }
 
 
     //void UseSkill(Skill skill)

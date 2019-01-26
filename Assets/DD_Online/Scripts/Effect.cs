@@ -9,6 +9,6 @@ public class Effect
     public int value;
     public int duration;
     public SkillType type;
-    public bool target;
+    public bool selfTargeted;
     public string attribute;
 }

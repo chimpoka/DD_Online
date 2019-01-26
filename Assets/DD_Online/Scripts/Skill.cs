@@ -1,11 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-
+using UnityEngine.EventSystems;
 
 [System.Serializable]
-public class Skill
+public class Skill : IPointerClickHandler
 {
     public SkillName skillName;
     //public int damage;
@@ -13,18 +12,17 @@ public class Skill
     public SkillType type;
     public int value;
     public TargetTeam targetTeam;
-    public bool isEnabled;
+    public bool isActive;
     public GameObject prefab;
     public BoxCollider2D collider;
     public GameObject selector;
     public bool isSelected;
 
+    public bool multipleTarget;
     public List<int> usePositions;
     public List<int> targetPositions;
 
     public List<Effect> effects;
-
-
 
     public bool IsSelected
     {
@@ -38,6 +36,12 @@ public class Skill
             if (isSelected == true)
                 startAnimation();
         }
+    }
+
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        Debug.Log("Clicked!");
     }
 
 
@@ -70,7 +74,7 @@ public class Skill
     {
         if (prefab != null)
         {
-            isEnabled = flag;
+            isActive = flag;
             SpriteRenderer[] sprites = prefab.GetComponentsInChildren<SpriteRenderer>();
 
             foreach (SpriteRenderer sprite in sprites)

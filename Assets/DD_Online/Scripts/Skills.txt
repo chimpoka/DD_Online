@@ -34,7 +34,7 @@
 
 	"Priest": 
 	{
-		"Smite":
+		"Priest1":
 		{
 			"Effects": 
 			{
@@ -47,7 +47,7 @@
 			"TargetPositions": "1100",
 			"UsePositions": "1100"
 		},
-		"StunningBlow":
+		"Priest2":
 		{
 			"Effects": 
 			{
@@ -58,7 +58,7 @@
 			"TargetPositions": "1100",
 			"UsePositions": "0011"
 		},
-		"BattleHeal":
+		"Priest3":
 		{
 			"Effects": 
 			{
@@ -102,7 +102,7 @@
 
 	"Berserk": 
 	{
-		"Smite":
+		"Berserk1":
 		{
 			"Effects": 
 			{
@@ -115,7 +115,7 @@
 			"TargetPositions": "1000",
 			"UsePositions": "1100"
 		},
-		"StunningBlow":
+		"Berserk2":
 		{
 			"Effects": 
 			{
@@ -128,7 +128,7 @@
 			"TargetPositions": "1111",
 			"UsePositions": "1100"
 		},
-		"BattleHeal":
+		"Berserk3":
 		{
 			"Effects": 
 			{
@@ -144,7 +144,7 @@
 
 	"Fairy": 
 	{
-		"Smite":
+		"Fairy1":
 		{
 			"Effects": 
 			{
@@ -155,18 +155,18 @@
 			"TargetPositions": "0111",
 			"UsePositions": "1100"
 		},
-		"StunningBlow":
+		"Fairy2":
 		{
 			"Effects": 
 			{
-				{"Type": "Buff", "Value": 1, "SelfTargeted": "False" },
+				{"Type": "Buff", "Value": 1, "Attribute": "Speed", "SelfTargeted": "False" },
 			},
 			"MultipleTarget": "True",
 			"Team": "Allied",
 			"TargetPositions": "1111",
 			"UsePositions": "1100"
 		},
-		"BattleHeal":
+		"Fairy3":
 		{
 			"Effects": 
 			{
@@ -182,7 +182,7 @@
 
 	"Mage": 
 	{
-		"Smite":
+		"Mage1":
 		{
 			"Effects": 
 			{
@@ -194,7 +194,7 @@
 			"TargetPositions": "1111",
 			"UsePositions": "1100"
 		},
-		"StunningBlow":
+		"Mage2":
 		{
 			"Effects": 
 			{
@@ -206,7 +206,7 @@
 			"TargetPositions": "0110",
 			"UsePositions": "1110"
 		},
-		"BattleHeal":
+		"Mage3":
 		{
 			"Effects": 
 			{

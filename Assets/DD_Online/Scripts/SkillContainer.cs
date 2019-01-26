@@ -11,29 +11,51 @@ using System;
 
 public class SkillContainer
 {
-    
-
-    public static Skill getSkill(HeroClass heroClass, SkillName skillName)
+    private static SkillContainer _instance;
+    public static SkillContainer Instance
     {
-        //TODO: save file once and then read it
-        string SkillsJson = "Assets/DD_Online/Scripts/Skills.txt";
-        var file = JSON.Parse(File.ReadAllText(SkillsJson));
-        Skill skill = parseJson(file[heroClass.ToString()][skillName.ToString()], skillName, heroClass);
+        get
+        {
+            if (_instance == null)
+                _instance = new SkillContainer();
+
+            return _instance;  
+        }
+    }
+
+    private JSONNode parsedJson;
+    private string fileName = "Assets/DD_Online/Scripts/Skills.txt";
+
+
+
+    public void init()
+    {
+        parsedJson = JSON.Parse(File.ReadAllText(fileName));
+    }
+
+    public Skill getSkill(HeroClass heroClass, SkillName skillName)
+    {
+        var heroField = parsedJson[heroClass.ToString()];
+        if (heroField.Count == 0) Debug.LogError("No hero '" + heroClass + "'! Check '" + fileName + "'");
+
+        var skillJson = parsedJson[heroClass.ToString()][skillName.ToString()];
+        if (skillJson.Count == 0) Debug.LogError("Hero '" + heroClass + "' has no skill: '" + skillName + "'! Check '" + fileName + "'");
+
+        Skill skill = parseJson(skillJson, skillName, heroClass);
 
         return skill;
     }
 
  
 
-    private static Skill parseJson(JSONNode json, SkillName skillName, HeroClass heroClass)
+    private Skill parseJson(JSONNode json, SkillName skillName, HeroClass heroClass)
     {
-        SkillType type = SkillType.Default;
+        bool multipleTarget;
         TargetTeam targetTeam = TargetTeam.Default;
         List<int> targetPositions;
         List<int> usePositions;
         int value;
         List<Effect> effects = new List<Effect>();
-
 
 
         // effects
@@ -46,33 +68,27 @@ public class SkillContainer
             
             effect.value = effectTable.Value["Value"];
 
-            if (effectTable.Value["Target"] == "True")
-                effect.target = true;
+            if (effectTable.Value["SelfTargeted"] == "True")
+                effect.selfTargeted = true;
             else
-                effect.target = false;
+                effect.selfTargeted = false;
 
 
             effect.duration = effectTable.Value["Duration"];
             effect.attribute = effectTable.Value["Attribute"];
             effects.Add(effect);
-            //Debug.Log(effect.type.ToString());
-            //Debug.Log(effect.value.ToString());
-            //Debug.Log(effect.target.ToString());
-            //Debug.Log(effect.duration.ToString());
-            //Debug.Log(effect.attribute.ToString());
         }
 
-        //// type
-        //foreach (SkillType _type in (SkillType[])Enum.GetValues(typeof(SkillType)))
-        //{
-        //    if (_type.ToString() == json["Type"]) type = _type;
-        //}
+
+        if (json["MultipleTarget"] == "True")
+            multipleTarget = true;
+        else
+            multipleTarget = false;
 
         // targetTeam
         foreach (TargetTeam _targetTeam in (TargetTeam[])Enum.GetValues(typeof(TargetTeam)))
-        {
             if (_targetTeam.ToString() == json["Team"]) targetTeam = _targetTeam;
-        }
+        
 
         //targetPositions
         string s = json["TargetPositions"];
@@ -88,19 +104,8 @@ public class SkillContainer
         usePositions = new List<int>();
         for (int i = 0; i < s.Length; ++i)
         {
-            if (heroClass == HeroClass.Priest)
-                Debug.Log("Skill: " + skillName + ";  s[i]: " + s[i]);
-
             if (s[i] == '1')
-            {
-                //Debug.Log("Skill: " + skillName + ";  usePos: " + i);
                 usePositions.Add(i + 1);
-                //if (heroClass == HeroClass.Priest)
-                //{
-                //    int j = i + 1;
-                //    Debug.Log("Skill: " + skillName + ";  usePos: " + j);
-                //}
-            }
         }
 
         // value
@@ -111,11 +116,11 @@ public class SkillContainer
         Skill skill = new Skill
         {
             skillName = skillName,
-            type = type,
+            multipleTarget = multipleTarget,
             targetTeam = targetTeam,
             targetPositions = targetPositions,
             usePositions = usePositions,
-            value = value
+            effects = effects
         };
 
         return skill;

@@ -7,9 +7,13 @@ public class Battle : MonoBehaviour
 {
     public BattleState battleState;
 
+    private void Awake()
+    {
+        SkillContainer.Instance.init();
+    }
 
     void Start()
-    {
+    { 
         battleState = new BattleState_StartBattle(this);
     }
 
