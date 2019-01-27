@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BattleState_HeroSelection : BattleState
 {
-    public BattleState_HeroSelection(Battle battle, BattleState state)
+    public BattleState_HeroSelection(GameState_Battle battle, BattleState state)
         : base(battle, state)
     {}
 

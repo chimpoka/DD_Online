@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BattleState_TurnAfterSkillSelected : BattleState
 {
-    public BattleState_TurnAfterSkillSelected(Battle battle, BattleState state)
+    public BattleState_TurnAfterSkillSelected(GameState_Battle battle, BattleState state)
         : base(battle, state)
     { }
 

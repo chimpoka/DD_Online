@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BattleState_UsingSkill : BattleState
 {
-    public BattleState_UsingSkill(Battle battle, BattleState state)
+    public BattleState_UsingSkill(GameState_Battle battle, BattleState state)
       : base(battle, state)
     { }
 

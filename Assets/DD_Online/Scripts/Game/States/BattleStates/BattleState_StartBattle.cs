@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BattleState_StartBattle : BattleState
 {
-    public BattleState_StartBattle(Battle battle)
+    public BattleState_StartBattle(GameState_Battle battle)
            : base(battle)
     { }
 

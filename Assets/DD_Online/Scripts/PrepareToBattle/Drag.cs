@@ -2,14 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PrepareToBattle : MonoBehaviour
+public class Drag : MonoBehaviour
 {
-    public List<Hero> heroes1;
-    public List<Hero> heroes2;
-
+    // Start is called before the first frame update
     void Start()
     {
-        //heroes1[1].skillList[1] = new Skill();
         
     }
 

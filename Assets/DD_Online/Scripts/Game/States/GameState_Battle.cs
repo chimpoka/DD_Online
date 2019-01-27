@@ -3,21 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Battle : MonoBehaviour
+public class GameState_Battle : GameState
 {
-    public BattleState battleState;
-
-    private void Awake()
+    public GameState_Battle(Game game)
+    : base(game)
     {
-        SkillContainer.Instance.init();
-    }
-
-    void Start()
-    { 
         battleState = new BattleState_StartBattle(this);
     }
 
-    void Update()
+    public BattleState battleState;
+
+    public override void update()
     {
         battleState.execute();
         battleState.showSkillHover();

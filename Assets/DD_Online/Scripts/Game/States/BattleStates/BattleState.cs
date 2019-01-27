@@ -4,9 +4,7 @@ using UnityEngine;
 
 public abstract class BattleState
 {
-    private enum EffectState { Positive, Negative }
-
-    public Battle battle;
+    public GameState_Battle battle;
 
     public Skill selectedSkill;
     public Hero targetHero;
@@ -18,7 +16,7 @@ public abstract class BattleState
 
 
 
-    public BattleState(Battle battle, BattleState state = null)
+    public BattleState(GameState_Battle battle, BattleState state = null)
     {
         this.battle = battle;
         if (state != null)
