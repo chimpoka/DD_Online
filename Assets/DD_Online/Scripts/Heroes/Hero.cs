@@ -6,40 +6,46 @@ using UnityEngine.UI;
 
 
 // TODO: Delete MonoBehaviour Inheritance
-public class Hero : MonoBehaviour
+public class Hero
 {
-    public enum Team { Left, Right }
+    public Hero()
+    {
+        TurnState = TurnStates.Undone;
+    }
 
-    public int pureDamage;
-    public int pureHealth;
-    public int pureSpeed;
 
-    public HeroClass heroClass;
-    public int damage;
+    public HeroClass name;
 
     [SerializeField]
-    private int health;
-    private int maxHealth;
+    protected int health;
+    public int maxHealth;
+    protected bool isSelected;
     public int speed;
-
-    public int ownerID;
     public Team team;
-    public Team oppositeTeam;
     public int position;
-    private TurnStates turnState;
-    public GameObject prefab;
-    public Image healthBar;
-    new public BoxCollider2D collider;
-    private bool isSelected;
-    public GameObject turnDoneIndicator;
-    public GameObject turnInProcessIndicator;
-    public GameObject selector;
-    public bool isTargeted;
-
     public List<SkillName> skillNames;
-
+    //public int ownerID;
     [HideInInspector]
     public List<Skill> skillList;
+    [HideInInspector]
+    public GameObject prefab;
+
+    [HideInInspector]
+    public Team oppositeTeam;
+    [HideInInspector]
+    protected TurnStates turnState;
+    [HideInInspector]
+    public Image healthBar;
+    [HideInInspector]
+    public BoxCollider2D collider;
+    [HideInInspector]
+    public GameObject turnDoneIndicator;
+    [HideInInspector]
+    public GameObject turnInProcessIndicator;
+    [HideInInspector]
+    public GameObject selector;
+    [HideInInspector]
+    public bool isTargeted;
 
 
 
@@ -52,8 +58,8 @@ public class Hero : MonoBehaviour
         set
         {
             turnState = value;
-            setTurnDoneIndicator(turnState);
-            setTurnInProcessIndicator(turnState);
+            //setTurnDoneIndicator(turnState);
+            //setTurnInProcessIndicator(turnState);
         }
     }
 
@@ -67,11 +73,11 @@ public class Hero : MonoBehaviour
         {
             isSelected = value;
 
-            setSelector(isSelected);
-            if (isSelected == true)
-                instantiateSkills();
-            else
-                destroySkills();
+            //setSelector(isSelected);
+            //if (isSelected == true)
+            //    instantiateSkills();
+            //else
+            //    destroySkills();
         }
     }
 
@@ -83,81 +89,75 @@ public class Hero : MonoBehaviour
         set
         {
             health = value;
-            health = Mathf.Clamp(health, 0, maxHealth);
-            updateHealthBar();
+            //health = Mathf.Clamp(health, 0, maxHealth);
+            //updateHealthBar();
         }
     }
 
     private void Awake()
     {
-        TurnState = TurnStates.Undone;
+        Debug.Log("!Awake Hero");
+        //TurnState = TurnStates.Undone;
 
-        foreach (SkillName skillName in skillNames)
-        {
-            Skill skill = SkillContainer.Instance.getSkill(heroClass, skillName);
-            skill.setOwner(this);
-            skillList.Add(skill);
-        }
-        addSkipTurnSkill();
-
-        if (team == Team.Left)
-            oppositeTeam = Team.Right;
-        else if (team == Team.Right)
-            oppositeTeam = Team.Left;
-
-        maxHealth = health;
-    }
-
-    private void addSkipTurnSkill()
-    {
-        Skill skill = new Skill();
-        skill.setOwner(this);
-        skill.skillName = SkillName.SkipTurn;
-        skill.usePositions = new List<int>() { 1,2,3,4 };
-        skillList.Add(skill);
-    }
-
-
-
-    private void instantiateSkills()
-    {
-        int index = 0;
-
-        if (turnState == TurnStates.InProcess)
-        {
-            foreach (Skill skill in skillList)
-            {
-                skill.instantiate(SceneElementsContainer.skillTransforms[(int)team][index++].position);
-                skill.enable(checkSkillUsePosition(skill));
-            }
-        }
-        else
-        {
-            foreach (Skill skill in skillList)
-            {
-                if (skill.skillName != SkillName.SkipTurn)
-                {
-                    skill.instantiate(SceneElementsContainer.skillTransforms[(int)team][index++].position);
-                    skill.enable(false);
-                }
-            }
-        }
-    }
-
-    private bool checkSkillUsePosition(Skill skill)
-    {
-        //if (heroClass == HeroClass.Priest)
+        //foreach (SkillName skillName in skillNames)
         //{
-        //    Debug.Log("Skill: " + skill.skillName + ";   this.position: " + position);
-        //    foreach (int position in skill.usePositions)
-        //        Debug.Log("pos: " + position);
+        //    Skill skill = SkillContainer.Instance.getSkill(heroClass, skillName);
+        //    skill.setOwner(this);
+        //    skillList.Add(skill);
         //}
+        //addSkipTurnSkill();
 
-        foreach (int position in skill.usePositions)
-        {
-            if (position == this.position)
-                return true;
-        }
+        //if (team == Team.Left)
+        //    oppositeTeam = Team.Right;
+        //else if (team == Team.Right)
+        //    oppositeTeam = Team.Left;
+
+        //maxHealth = health;
+    }
+
+    protected virtual void addSkipTurnSkill()
+    {
+    //    Skill skill = new Skill();
+    //    skill.setOwner(this);
+    //    skill.skillName = SkillName.SkipTurn;
+    //    skill.usePositions = new List<int>() { 1,2,3,4 };
+    //    skillList.Add(skill);
+    }
+
+
+
+    protected virtual void instantiateSkills()
+    {
+        //int index = 0;
+
+        //if (turnState == TurnStates.InProcess)
+        //{
+        //    foreach (Skill skill in skillList)
+        //    {
+        //        skill.instantiate(SceneElementsContainer.skillTransforms[(int)team][index++].position);
+        //        skill.enable(checkSkillUsePosition(skill));
+        //    }
+        //}
+        //else
+        //{
+        //    foreach (Skill skill in skillList)
+        //    {
+        //        if (skill.skillName != SkillName.SkipTurn)
+        //        {
+        //            skill.instantiate(SceneElementsContainer.skillTransforms[(int)team][index++].position);
+        //            skill.enable(false);
+        //        }
+        //    }
+        //}
+    }
+
+    protected virtual bool checkSkillUsePosition(Skill skill)
+    {
+    //    foreach (int position in skill.usePositions)
+    //    {
+    //        if (position == this.position)
+    //            return true;
+    //    }
 
         return false;
     }
@@ -178,114 +178,36 @@ public class Hero : MonoBehaviour
 
 
 
-    public void setSelected(bool flag)
+
+    protected virtual void setSelector(bool flag) {}
+    protected virtual void setTurnDoneIndicator(TurnStates turnState) {}
+    protected virtual void enableTurnDoneIndicator(bool flag) {}
+    protected virtual void setTurnInProcessIndicator(TurnStates turnState) {}
+    protected virtual void enableTurnInProcessIndicator(bool flag) {}
+
+
+
+    public virtual void instantiate()
     {
-        IsSelected = flag;
+        //if (prefab == null)
+        //{
+        //    prefab = MonoBehaviour.Instantiate(Resources.Load("Prefabs/Heroes/Prefab_" + heroClass.ToString()) as GameObject,
+        //            SceneElementsContainer.heroTransforms[(int)team][position - 1].position, Quaternion.identity) as GameObject;
+
+        //    if (team == Team.Right)
+        //    {
+        //        Vector3 rotation = new Vector3(0, 180, 0);
+        //        prefab.transform.eulerAngles = rotation;
+        //    }
+
+        //    collider = SceneElementsContainer.heroColliders[(int)team][position - 1];
+        //    //GameObject obj = prefab.GetComponent<>
+        //    RectTransform[] objects = prefab.GetComponentsInChildren<RectTransform>();
+        //    foreach (RectTransform obj in objects)
+        //    {
+        //        if (obj.name == "HealthBar")
+        //            healthBar = obj.GetComponent<Image>();
+        //    }
+        //}
     }
-
-    private void setSelector(bool flag)
-    {
-        if (selector != null)
-        {
-            if (flag == true)
-                selector.transform.position = prefab.transform.position + Vector3.up * 2.5f;
-
-            selector.GetComponent<SpriteRenderer>().enabled = flag;
-        }
-    }
-
-
-    public void setTargeted(bool flag)
-    {
-        isTargeted = flag;
-    }
-
-
-
-    private void setTurnDoneIndicator(TurnStates turnState)
-    {
-        if (TurnState == TurnStates.Undone)
-            enableTurnDoneIndicator(false);
-        else if (TurnState == TurnStates.Done)
-            enableTurnDoneIndicator(true);
-        else if (TurnState == TurnStates.InProcess)
-            enableTurnDoneIndicator(false);
-    }
-
-    private void enableTurnDoneIndicator(bool flag)
-    {
-        if (turnDoneIndicator == null && flag == true)
-        {
-            turnDoneIndicator = MonoBehaviour.Instantiate(Resources.Load("Prefabs/TurnDoneIndicatorPrefab") as GameObject,
-                    SceneElementsContainer.turnStateIndicatorTransforms[(int)team][position - 1].position + Vector3.right * 0.5f, Quaternion.identity) as GameObject;
-        }
-        else if (turnDoneIndicator != null)
-        {
-            turnDoneIndicator.GetComponent<SpriteRenderer>().enabled = flag;
-        }
-    }
-
-    private void setTurnInProcessIndicator(TurnStates turnState)
-    {
-        if (TurnState == TurnStates.Undone)
-            enableTurnInProcessIndicator(false);
-        else if (TurnState == TurnStates.Done)
-            enableTurnInProcessIndicator(false);
-        else if (TurnState == TurnStates.InProcess)
-            enableTurnInProcessIndicator(true);
-    }
-
-    private void enableTurnInProcessIndicator(bool flag)
-    {
-        if (turnInProcessIndicator != null)
-        {
-            if (flag == true)
-                turnInProcessIndicator.transform.position = 
-                    SceneElementsContainer.turnStateIndicatorTransforms[(int)team][position - 1].position;
-
-            turnInProcessIndicator.GetComponent<SpriteRenderer>().enabled = flag;
-        }
-    }
-
-
-
-    public void instantiate()
-    {
-        if (prefab == null)
-        {
-            prefab = MonoBehaviour.Instantiate(Resources.Load("Prefabs/Heroes/Prefab_" + heroClass.ToString()) as GameObject,
-                    SceneElementsContainer.heroTransforms[(int)team][position - 1].position, Quaternion.identity) as GameObject;
-
-            if (team == Team.Right)
-            {
-                Vector3 rotation = new Vector3(0, 180, 0);
-                prefab.transform.eulerAngles = rotation;
-            }
-
-            collider = SceneElementsContainer.heroColliders[(int)team][position - 1];
-            //GameObject obj = prefab.GetComponent<>
-            RectTransform[] objects = prefab.GetComponentsInChildren<RectTransform>();
-            foreach (RectTransform obj in objects)
-            {
-                if (obj.name == "HealthBar")
-                    healthBar = obj.GetComponent<Image>();
-            }
-        }
-    }
-
-    private void updateHealthBar()
-    {
-        healthBar.fillAmount = Mathf.InverseLerp(0, maxHealth, health);
-    }
-
-
-    //void UseSkill(Skill skill)
-    //{
-
-    //}
-
-    //List<Skill> GetSkills()
-    //{
-    //    return skillList;
-    //}
 }

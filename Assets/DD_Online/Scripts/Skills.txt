@@ -1,222 +1,252 @@
 {
 	"Defender": 
 	{
-		"Smite":
+		"Speed": 9,
+		"Health": 9, 
+		"Skills":
 		{
-			"Effects": 
+			"Smite":
 			{
-				{"Type": "Attack", "Value": 4, "SelfTargeted": "False" },
-				{"Type": "Poison", "Value": 2, "Duration": 4, "SelfTargeted": "False" },
-				{"Type": "Buff", "Value": 3, "Attribute": "Speed", "SelfTargeted": "True"}
+				"Effects": 
+				{
+					{"Type": "Attack", "Value": 4, "SelfTargeted": "False" },
+					{"Type": "Poison", "Value": 2, "Duration": 4, "SelfTargeted": "False" },
+					{"Type": "Buff", "Value": 3, "Attribute": "Speed", "SelfTargeted": "True"}
+				},
+				"Team": "Enemy",
+				"MultipleTarget": "False",
+				"TargetPositions": "1100",
+				"UsePositions": "1100"
 			},
-			"Team": "Enemy",
-			"MultipleTarget": "False",
-			"TargetPositions": "1100",
-			"UsePositions": "1100"
-		},
-		"StunningBlow":
-		{
-			"Type": "Attack",
-			"Value": 2,
-			"Team": "Enemy",
-			"TargetPositions": 1100,
-			"UsePositions": 1100
-		},
-		"BattleHeal":
-		{
-			"Type": "Heal",
-			"Value": 3,
-			"Team": "Allied",
-			"TargetPositions": 1111,
-			"UsePositions": 1111
+			"StunningBlow":
+			{
+				"Type": "Attack",
+				"Value": 2,
+				"Team": "Enemy",
+				"TargetPositions": 1100,
+				"UsePositions": 1100
+			},
+			"BattleHeal":
+			{
+				"Type": "Heal",
+				"Value": 3,
+				"Team": "Allied",
+				"TargetPositions": 1111,
+				"UsePositions": 1111
+			}
 		}
 	},
 
 	"Priest": 
 	{
-		"Priest1":
+		"Speed": 9,
+		"Health": 9, 
+		"Skills":
 		{
-			"Effects": 
+			"Priest1":
 			{
-				{"Type": "Attack", "Value": 3, "SelfTargeted": "False" },
-				{"Type": "Poison", "Value": 2, "Duration": 3, "SelfTargeted": "False" },
-				{"Type": "Debuff", "Value": 3, "Attribute": "Speed", "SelfTargeted": "True"}
+				"Effects": 
+				{
+					{"Type": "Attack", "Value": 3, "SelfTargeted": "False" },
+					{"Type": "Poison", "Value": 2, "Duration": 3, "SelfTargeted": "False" },
+					{"Type": "Debuff", "Value": 3, "Attribute": "Speed", "SelfTargeted": "True"}
+				},
+				"MultipleTarget": "False",
+				"Team": "Enemy",
+				"TargetPositions": "1100",
+				"UsePositions": "1100"
 			},
-			"MultipleTarget": "False",
-			"Team": "Enemy",
-			"TargetPositions": "1100",
-			"UsePositions": "1100"
-		},
-		"Priest2":
-		{
-			"Effects": 
+			"Priest2":
 			{
-				{"Type": "Buff", "Value": 3, "Attribute": "Speed", "SelfTargeted": "False"}
+				"Effects": 
+				{
+					{"Type": "Buff", "Value": 3, "Attribute": "Speed", "SelfTargeted": "False"}
+				},
+				"MultipleTarget": "True",
+				"Team": "Allied",
+				"TargetPositions": "1100",
+				"UsePositions": "0011"
 			},
-			"MultipleTarget": "True",
-			"Team": "Allied",
-			"TargetPositions": "1100",
-			"UsePositions": "0011"
-		},
-		"Priest3":
-		{
-			"Effects": 
+			"Priest3":
 			{
-				{"Type": "Heal", "Value": 1, "SelfTargeted": "False" },
-				{"Type": "Buff", "Value": 1, "Attribute": "Speed", "SelfTargeted": "False"}
-			},
-			"MultipleTarget": "True",
-			"Team": "Allied",
-			"TargetPositions": "1111",
-			"UsePositions": "0001"
+				"Effects": 
+				{
+					{"Type": "Heal", "Value": 1, "SelfTargeted": "False" },
+					{"Type": "Buff", "Value": 1, "Attribute": "Speed", "SelfTargeted": "False"}
+				},
+				"MultipleTarget": "True",
+				"Team": "Allied",
+				"TargetPositions": "1111",
+				"UsePositions": "0001"
+			}
 		}
 	},
 
 	"Hunter": 
 	{
-		"Smite":
+		"Speed": 9,
+		"Health": 9, 
+		"Skills":
 		{
-			"Type": "Attack",
-			"Value": 5,
-			"Team": "Enemy",
-			"TargetPositions": 1100,
-			"UsePositions": 1100
-		},
-		"StunningBlow":
-		{
-			"Type": "Attack",
-			"Value": 2,
-			"Team": "Enemy",
-			"TargetPositions": 1100,
-			"UsePositions": 1100
-		},
-		"BattleHeal":
-		{
-			"Type": "Heal",
-			"Value": 3,
-			"Team": "Allied",
-			"TargetPositions": 1111,
-			"UsePositions": 1111
+			"Smite":
+			{
+				"Type": "Attack",
+				"Value": 5,
+				"Team": "Enemy",
+				"TargetPositions": 1100,
+				"UsePositions": 1100
+			},
+			"StunningBlow":
+			{
+				"Type": "Attack",
+				"Value": 2,
+				"Team": "Enemy",
+				"TargetPositions": 1100,
+				"UsePositions": 1100
+			},
+			"BattleHeal":
+			{
+				"Type": "Heal",
+				"Value": 3,
+				"Team": "Allied",
+				"TargetPositions": 1111,
+				"UsePositions": 1111
+			}
 		}
 	},
 
 	"Berserk": 
 	{
-		"Berserk1":
+		"Speed": 10,
+		"Health": 10, 
+		"Skills":
 		{
-			"Effects": 
+			"Berserk1":
 			{
-				{"Type": "Attack", "Value": 6, "SelfTargeted": "False" },
-				{"Type": "Attack", "Value": 4, "SelfTargeted": "True" },
-				{"Type": "Debuff", "Value": 3, "Attribute": "Speed", "SelfTargeted": "False"}
+				"Effects": 
+				{
+					{"Type": "Attack", "Value": 6, "SelfTargeted": "False" },
+					{"Type": "Attack", "Value": 4, "SelfTargeted": "True" },
+					{"Type": "Debuff", "Value": 3, "Attribute": "Speed", "SelfTargeted": "False"}
+				},
+				"MultipleTarget": "False",
+				"Team": "Enemy",
+				"TargetPositions": "1000",
+				"UsePositions": "1100"
 			},
-			"MultipleTarget": "False",
-			"Team": "Enemy",
-			"TargetPositions": "1000",
-			"UsePositions": "1100"
-		},
-		"Berserk2":
-		{
-			"Effects": 
+			"Berserk2":
 			{
-				{"Type": "Attack", "Value": 2, "SelfTargeted": "False" },
-				{"Type": "Bleed", "Value": 2, "Duration": "3", "SelfTargeted": "False" },
-				{"Type": "Debuff", "Value": 2, "Attribute": "Speed", "SelfTargeted": "True"}
+				"Effects": 
+				{
+					{"Type": "Attack", "Value": 2, "SelfTargeted": "False" },
+					{"Type": "Bleed", "Value": 2, "Duration": "3", "SelfTargeted": "False" },
+					{"Type": "Debuff", "Value": 2, "Attribute": "Speed", "SelfTargeted": "True"}
+				},
+				"MultipleTarget": "False",
+				"Team": "Enemy",
+				"TargetPositions": "1111",
+				"UsePositions": "1100"
 			},
-			"MultipleTarget": "False",
-			"Team": "Enemy",
-			"TargetPositions": "1111",
-			"UsePositions": "1100"
-		},
-		"Berserk3":
-		{
-			"Effects": 
+			"Berserk3":
 			{
-				{"Type": "Heal", "Value": 3, "SelfTargeted": "True" },
-				{"Type": "Buff", "Value": 2, "Attribute": "Speed", "SelfTargeted": "True"}
-			},
-			"MultipleTarget": "False",
-			"Team": "Allied",
-			"TargetPositions": "Self",
-			"UsePositions": "1111"
+				"Effects": 
+				{
+					{"Type": "Heal", "Value": 3, "SelfTargeted": "True" },
+					{"Type": "Buff", "Value": 2, "Attribute": "Speed", "SelfTargeted": "True"}
+				},
+				"MultipleTarget": "False",
+				"Team": "Allied",
+				"TargetPositions": "Self",
+				"UsePositions": "1111"
+			}
 		}
 	},
 
 	"Fairy": 
 	{
-		"Fairy1":
+		"Speed": 9,
+		"Health": 12, 
+		"Skills":
 		{
-			"Effects": 
+			"Fairy1":
 			{
-				{"Type": "Attack", "Value": 3, "SelfTargeted": "False" },
+				"Effects": 
+				{
+					{"Type": "Attack", "Value": 3, "SelfTargeted": "False" },
+				},
+				"MultipleTarget": "True",
+				"Team": "Enemy",
+				"TargetPositions": "0111",
+				"UsePositions": "1100"
 			},
-			"MultipleTarget": "True",
-			"Team": "Enemy",
-			"TargetPositions": "0111",
-			"UsePositions": "1100"
-		},
-		"Fairy2":
-		{
-			"Effects": 
+			"Fairy2":
 			{
-				{"Type": "Buff", "Value": 1, "Attribute": "Speed", "SelfTargeted": "False" },
+				"Effects": 
+				{
+					{"Type": "Buff", "Value": 1, "Attribute": "Speed", "SelfTargeted": "False" },
+				},
+				"MultipleTarget": "True",
+				"Team": "Allied",
+				"TargetPositions": "1111",
+				"UsePositions": "1100"
 			},
-			"MultipleTarget": "True",
-			"Team": "Allied",
-			"TargetPositions": "1111",
-			"UsePositions": "1100"
-		},
-		"Fairy3":
-		{
-			"Effects": 
+			"Fairy3":
 			{
-				{"Type": "Heal", "Value": 1, "SelfTargeted": "False" },
-				{"Type": "Buff", "Value": 1, "Attribute": "Speed", "SelfTargeted": "True" },
-			},
-			"MultipleTarget": "True",
-			"Team": "Allied",
-			"TargetPositions": "1111",
-			"UsePositions": "1111"
+				"Effects": 
+				{
+					{"Type": "Heal", "Value": 1, "SelfTargeted": "False" },
+					{"Type": "Buff", "Value": 1, "Attribute": "Speed", "SelfTargeted": "True" },
+				},
+				"MultipleTarget": "True",
+				"Team": "Allied",
+				"TargetPositions": "1111",
+				"UsePositions": "1111"
+			}
 		}
 	},
 
 	"Mage": 
 	{
-		"Mage1":
+		"Speed": 12,
+		"Health": 7, 
+		"Skills":
 		{
-			"Effects": 
+			"Mage1":
 			{
-				{"Type": "Attack", "Value": 1, "SelfTargeted": "False" },
-				{"Type": "Poison", "Value": 1, "Duration": "4", "SelfTargeted": "False" },
+				"Effects": 
+				{
+					{"Type": "Attack", "Value": 1, "SelfTargeted": "False" },
+					{"Type": "Poison", "Value": 1, "Duration": "4", "SelfTargeted": "False" },
+				},
+				"MultipleTarget": "True",
+				"Team": "Enemy",
+				"TargetPositions": "1111",
+				"UsePositions": "1100"
 			},
-			"MultipleTarget": "True",
-			"Team": "Enemy",
-			"TargetPositions": "1111",
-			"UsePositions": "1100"
-		},
-		"Mage2":
-		{
-			"Effects": 
+			"Mage2":
 			{
-				{"Type": "Attack", "Value": 3, "SelfTargeted": "False" },
-				{"Type": "Stun", "Duration": "1", "SelfTargeted": "False" },
+				"Effects": 
+				{
+					{"Type": "Attack", "Value": 3, "SelfTargeted": "False" },
+					{"Type": "Stun", "Duration": "1", "SelfTargeted": "False" },
+				},
+				"MultipleTarget": "True",
+				"Team": "Enemy",
+				"TargetPositions": "0110",
+				"UsePositions": "1110"
 			},
-			"MultipleTarget": "True",
-			"Team": "Enemy",
-			"TargetPositions": "0110",
-			"UsePositions": "1110"
-		},
-		"Mage3":
-		{
-			"Effects": 
+			"Mage3":
 			{
-				{"Type": "Heal", "Value": 1, "SelfTargeted": "False" },
-				{"Type": "Buff", "Value": 3, "Attribute": "Speed", "SelfTargeted": "False" },
-			},
-			"MultipleTarget": "False",
-			"Team": "Allied",
-			"TargetPositions": "1111",
-			"UsePositions": "1111"
+				"Effects": 
+				{
+					{"Type": "Heal", "Value": 1, "SelfTargeted": "False" },
+					{"Type": "Buff", "Value": 3, "Attribute": "Speed", "SelfTargeted": "False" },
+				},
+				"MultipleTarget": "False",
+				"Team": "Allied",
+				"TargetPositions": "1111",
+				"UsePositions": "1111"
+			}
 		}
 	}
 }

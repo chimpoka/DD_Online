@@ -25,7 +25,7 @@ public class SkillContainer
 
     private JSONNode parsedJson;
     private string fileName = "Assets/DD_Online/Scripts/Skills.txt";
-
+    //Dictionary<HeroClass, Hero> heroesPool;
 
 
     public void init()
@@ -33,22 +33,70 @@ public class SkillContainer
         parsedJson = JSON.Parse(File.ReadAllText(fileName));
     }
 
-    public Skill getSkill(HeroClass heroClass, SkillName skillName)
+    //public Skill getSkill(HeroClass heroClass, SkillName skillName)
+    //{
+    //    var heroField = parsedJson[heroClass.ToString()];
+    //    if (heroField.Count == 0) Debug.LogError("No hero '" + heroClass + "'! Check '" + fileName + "'");
+
+    //    var skillJson = parsedJson[heroClass.ToString()][skillName.ToString()];
+    //    if (skillJson.Count == 0) Debug.LogError("Hero '" + heroClass + "' has no skill: '" + skillName + "'! Check '" + fileName + "'");
+
+    //    Skill skill = parseSkill(skillJson, skillName);
+
+    //    return skill;
+    //}
+
+    public Hero createHero(HeroClass name)
     {
-        var heroField = parsedJson[heroClass.ToString()];
-        if (heroField.Count == 0) Debug.LogError("No hero '" + heroClass + "'! Check '" + fileName + "'");
+        foreach (var jsonHero in parsedJson)
+        {
+            if (jsonHero.Key == name.ToString())
+            {
+                List<Skill> skillList = new List<Skill>();
+                foreach (var skill in parsedJson[name.ToString()]["Skills"])
+                {
+                    SkillName skillName = SkillName.Default;
 
-        var skillJson = parsedJson[heroClass.ToString()][skillName.ToString()];
-        if (skillJson.Count == 0) Debug.LogError("Hero '" + heroClass + "' has no skill: '" + skillName + "'! Check '" + fileName + "'");
+                    foreach (SkillName _skillName in (SkillName[])Enum.GetValues(typeof(SkillName)))
+                        if (_skillName.ToString() == skill.Key) skillName = _skillName;
 
-        Skill skill = parseJson(skillJson, skillName, heroClass);
+                    var skillJson = parsedJson[name.ToString()]["Skills"][skillName.ToString()];
+                    skillList.Add(parseSkill(skillJson, skillName));
+                }
 
+                skillList.Add(createSkipTurnSkill());
+
+                Hero hero = new Hero
+                {
+                    name = name,
+                    speed = parsedJson["Speed"],
+                    Health = parsedJson["Health"],
+                    skillList = skillList
+                };
+
+                foreach (var skill in hero.skillList)
+                    skill.setOwner(hero);
+                //heroesPool.Add(name, hero);
+                return hero;
+            }
+        }
+
+        Debug.LogError("No hero '" + name + "' in Skills.txt");
+        return null;
+    }
+
+    private Skill createSkipTurnSkill()
+    {
+        Skill skill = new Skill
+        {
+            skillName = SkillName.SkipTurn,
+            usePositions = new List<int>() { 1, 2, 3, 4 }
+        };
         return skill;
     }
 
- 
 
-    private Skill parseJson(JSONNode json, SkillName skillName, HeroClass heroClass)
+    private Skill parseSkill(JSONNode json, SkillName skillName)
     {
         bool multipleTarget;
         TargetTeam targetTeam = TargetTeam.Default;

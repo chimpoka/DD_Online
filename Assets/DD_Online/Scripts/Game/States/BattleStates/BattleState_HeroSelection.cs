@@ -10,34 +10,34 @@ public class BattleState_HeroSelection : BattleState
 
     public override void execute()
     {
+        Debug.Log("!5");
         if (selectedSkill != null)
             selectSkill(selectedSkill, false);
-
-        foreach (Hero hero in heroes)
-            hero.setSelected(false);
-
-        currentHero = updateTurnStates(base.heroes, currentHero);
+        Debug.Log("!6");
+        foreach (Hero hero in battle.heroes)
+            hero.IsSelected = false;
+        Debug.Log("!7");
+        //currentHero = battle.heroes[3];
+        //Debug.Log("heroes[3]: " + currentHero.heroClass + ", " + currentHero.position);
+        currentHero = updateTurnStates();
+        Debug.Log("!8");
         selectHero(currentHero);
+        Debug.Log("!9");
         battle.battleState = new BattleState_TurnBeforeSkillSelected(battle, this);
+        Debug.Log("!10");
     }
 
 
 
-    private Hero updateTurnStates(List<Hero> heroList, Hero currentHero)
+    private BattleHero updateTurnStates()
     {
-        if (heroList.Count == 0)
-        {
-            Debug.Log("selectHero | heroList.Count == 0");
-            return null;
-        }
+        if (currentHero == null) currentHero = new BattleHero();
+        else currentHero.TurnState = TurnStates.Done;
 
-        if (currentHero != null && currentHero.TurnState == TurnStates.InProcess)
-            currentHero.TurnState = TurnStates.Done;
-
-        Hero nextHero = new Hero();
+        BattleHero nextHero = new BattleHero();
         int speed = -100;
 
-        foreach (Hero hero in heroList)
+        foreach (var hero in battle.heroes)
         {
             if (hero.TurnState == TurnStates.Undone)
             {
@@ -49,20 +49,21 @@ public class BattleState_HeroSelection : BattleState
             }
         }
 
-        if (nextHero == null)
-        {
-            Debug.Log("New Round");
-            startNewRound(heroList);
-            nextHero = updateTurnStates(heroList, currentHero);
-        }
-        else nextHero.TurnState = TurnStates.InProcess;
+        //if (nextHero == null)
+        //{
+        //    Debug.Log("New Round");
+        //    startNewRound();
+        //    nextHero = updateTurnStates();
+        //}
+        //else nextHero.TurnState = TurnStates.InProcess;
+        nextHero.TurnState = TurnStates.InProcess;
 
         return nextHero;
     }
 
-    private void startNewRound(List<Hero> heroList)
+    private void startNewRound()
     {
-        foreach (Hero hero in heroList)
+        foreach (var hero in battle.heroes)
             hero.TurnState = TurnStates.Undone;
     }
 

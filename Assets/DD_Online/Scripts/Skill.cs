@@ -112,8 +112,8 @@ public class Skill : IPointerClickHandler
     {
         string fileName = "Prefabs/SkillInfo/Prefab_" + skillName.ToString();
         Object obj = Resources.Load(fileName);
-        if (obj == null)
-            Debug.LogError("No file '" + fileName + "'!");
+        if (obj == null) { }
+            //Debug.LogError("No file '" + fileName + "'!");
         else
             hoverPrefab = MonoBehaviour.Instantiate((obj) as GameObject,
                 prefab.transform.position - Vector3.up * 0.4f, Quaternion.identity) as GameObject;

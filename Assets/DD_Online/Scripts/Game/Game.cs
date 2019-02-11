@@ -32,13 +32,19 @@ public class Game : MonoBehaviour
 
     void Start()
     {
+        SceneManager.sceneLoaded += onSceneLoaded;
         SceneManager.LoadScene(0, LoadSceneMode.Single);
         SkillContainer.Instance.init();
+    }
+
+    void onSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
         gameState = new GameState_TeamBuilding(this);
     }
 
     void Update()
     {
-        gameState.update();
+        if (gameState != null)
+            gameState.update();
     }
 }

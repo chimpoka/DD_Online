@@ -10,20 +10,29 @@ public class BattleState_StartBattle : BattleState
 
     public override void execute()
     {
-        heroes = SceneElementsContainer.heroes;
+        if (Input.GetKeyDown(KeyCode.Q))
+            Debug.Log("Q");
+        Debug.Log("!0");
+        //heroes = battle.heroes;
+        //battle.heroes = SceneElementsContainer.heroes;
         createHeroes();
+        Debug.Log("!1");
         createHeroSelectorPrefabs();
+        Debug.Log("!2");
         createSkillSelectorPrefab();
+        Debug.Log("!3");
         createTurnInProcessIndicatorPrefab();
+        Debug.Log("!4");
 
         battle.battleState = new BattleState_HeroSelection(battle, this);
+        Debug.Log("!5");
     }
 
     
 
     private void createHeroes()
     {
-        foreach (Hero hero in heroes)
+        foreach (var hero in battle.heroes)
             hero.instantiate();
     }
 
@@ -38,7 +47,7 @@ public class BattleState_StartBattle : BattleState
             selectors[i].GetComponent<SpriteRenderer>().enabled = false;
         }
 
-        foreach (Hero hero in heroes)
+        foreach (var hero in battle.heroes)
             hero.selector = selectors[(int)hero.team];
     }
 
@@ -50,7 +59,7 @@ public class BattleState_StartBattle : BattleState
                Vector3.zero, Quaternion.identity) as GameObject;
         indicator.GetComponent<SpriteRenderer>().enabled = false;
 
-        foreach (Hero hero in heroes)
+        foreach (var hero in battle.heroes)
             hero.turnInProcessIndicator = indicator;
     }
 

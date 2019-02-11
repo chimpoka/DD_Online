@@ -702,7 +702,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 228917704}
-  - component: {fileID: 228917705}
   m_Layer: 0
   m_Name: Hero1
   m_TagString: Untagged
@@ -724,38 +723,6 @@ Transform:
   m_Father: {fileID: 223689057}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &228917705
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 228917703}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9bafc936ce47424395ba02ed65efe77, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pureDamage: 0
-  pureHealth: 0
-  pureSpeed: 0
-  heroClass: 3
-  damage: 5
-  health: 10
-  speed: 5
-  ownerID: 2
-  team: 1
-  oppositeTeam: 0
-  position: 1
-  prefab: {fileID: 0}
-  healthBar: {fileID: 0}
-  collider: {fileID: 0}
-  turnDoneIndicator: {fileID: 0}
-  turnInProcessIndicator: {fileID: 0}
-  selector: {fileID: 0}
-  isTargeted: 0
-  skillNames: 030000000400000005000000
-  skillList: []
 --- !u!1 &233655265
 GameObject:
   m_ObjectHideFlags: 0
@@ -1300,7 +1267,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 421457607}
-  - component: {fileID: 421457608}
   m_Layer: 0
   m_Name: Hero4
   m_TagString: Untagged
@@ -1322,38 +1288,6 @@ Transform:
   m_Father: {fileID: 1654866494}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &421457608
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 421457606}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9bafc936ce47424395ba02ed65efe77, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pureDamage: 0
-  pureHealth: 0
-  pureSpeed: 0
-  heroClass: 3
-  damage: 5
-  health: 10
-  speed: 5
-  ownerID: 1
-  team: 0
-  oppositeTeam: 0
-  position: 1
-  prefab: {fileID: 0}
-  healthBar: {fileID: 0}
-  collider: {fileID: 0}
-  turnDoneIndicator: {fileID: 0}
-  turnInProcessIndicator: {fileID: 0}
-  selector: {fileID: 0}
-  isTargeted: 0
-  skillNames: 030000000400000005000000
-  skillList: []
 --- !u!1 &447676514
 GameObject:
   m_ObjectHideFlags: 0
@@ -2825,7 +2759,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1446723243}
-  - component: {fileID: 1446723244}
   m_Layer: 0
   m_Name: Hero1
   m_TagString: Untagged
@@ -2847,38 +2780,6 @@ Transform:
   m_Father: {fileID: 1654866494}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1446723244
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1446723242}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9bafc936ce47424395ba02ed65efe77, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pureDamage: 0
-  pureHealth: 0
-  pureSpeed: 0
-  heroClass: 1
-  damage: 5
-  health: 10
-  speed: 11
-  ownerID: 1
-  team: 0
-  oppositeTeam: 0
-  position: 4
-  prefab: {fileID: 0}
-  healthBar: {fileID: 0}
-  collider: {fileID: 0}
-  turnDoneIndicator: {fileID: 0}
-  turnInProcessIndicator: {fileID: 0}
-  selector: {fileID: 0}
-  isTargeted: 0
-  skillNames: 000000000100000002000000
-  skillList: []
 --- !u!1 &1462421959
 GameObject:
   m_ObjectHideFlags: 0
@@ -2948,7 +2849,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1581854185}
-  - component: {fileID: 1581854186}
   m_Layer: 0
   m_Name: Hero4
   m_TagString: Untagged
@@ -2970,38 +2870,6 @@ Transform:
   m_Father: {fileID: 223689057}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1581854186
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1581854184}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9bafc936ce47424395ba02ed65efe77, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pureDamage: 0
-  pureHealth: 0
-  pureSpeed: 0
-  heroClass: 4
-  damage: 5
-  health: 10
-  speed: 8
-  ownerID: 2
-  team: 1
-  oppositeTeam: 0
-  position: 4
-  prefab: {fileID: 0}
-  healthBar: {fileID: 0}
-  collider: {fileID: 0}
-  turnDoneIndicator: {fileID: 0}
-  turnInProcessIndicator: {fileID: 0}
-  selector: {fileID: 0}
-  isTargeted: 0
-  skillNames: 060000000700000008000000
-  skillList: []
 --- !u!1 &1596342417
 GameObject:
   m_ObjectHideFlags: 0
@@ -3252,7 +3120,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1798980037}
-  - component: {fileID: 1798980038}
   m_Layer: 0
   m_Name: Hero3
   m_TagString: Untagged
@@ -3274,38 +3141,6 @@ Transform:
   m_Father: {fileID: 1654866494}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1798980038
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1798980036}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9bafc936ce47424395ba02ed65efe77, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pureDamage: 0
-  pureHealth: 0
-  pureSpeed: 0
-  heroClass: 4
-  damage: 5
-  health: 10
-  speed: 8
-  ownerID: 1
-  team: 0
-  oppositeTeam: 0
-  position: 2
-  prefab: {fileID: 0}
-  healthBar: {fileID: 0}
-  collider: {fileID: 0}
-  turnDoneIndicator: {fileID: 0}
-  turnInProcessIndicator: {fileID: 0}
-  selector: {fileID: 0}
-  isTargeted: 0
-  skillNames: 060000000700000008000000
-  skillList: []
 --- !u!1 &1799960699
 GameObject:
   m_ObjectHideFlags: 0
@@ -3511,7 +3346,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1834632924}
-  - component: {fileID: 1834632925}
   m_Layer: 0
   m_Name: Hero2
   m_TagString: Untagged
@@ -3533,38 +3367,6 @@ Transform:
   m_Father: {fileID: 1654866494}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1834632925
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1834632923}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9bafc936ce47424395ba02ed65efe77, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pureDamage: 0
-  pureHealth: 0
-  pureSpeed: 0
-  heroClass: 5
-  damage: 5
-  health: 10
-  speed: 3
-  ownerID: 1
-  team: 0
-  oppositeTeam: 0
-  position: 3
-  prefab: {fileID: 0}
-  healthBar: {fileID: 0}
-  collider: {fileID: 0}
-  turnDoneIndicator: {fileID: 0}
-  turnInProcessIndicator: {fileID: 0}
-  selector: {fileID: 0}
-  isTargeted: 0
-  skillNames: 090000000a0000000b000000
-  skillList: []
 --- !u!1 &1853710636
 GameObject:
   m_ObjectHideFlags: 0
@@ -3907,16 +3709,8 @@ MonoBehaviour:
   - {fileID: 1955253978}
   - {fileID: 331131312}
   - {fileID: 999716417}
-  heroesTeam1:
-  - {fileID: 1446723244}
-  - {fileID: 1834632925}
-  - {fileID: 1798980038}
-  - {fileID: 421457608}
-  heroesTeam2:
-  - {fileID: 228917705}
-  - {fileID: 2089719041}
-  - {fileID: 2124055214}
-  - {fileID: 1581854186}
+  heroesTeam1: []
+  heroesTeam2: []
 --- !u!4 &2021597980
 Transform:
   m_ObjectHideFlags: 0
@@ -4019,7 +3813,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2089719040}
-  - component: {fileID: 2089719041}
   m_Layer: 0
   m_Name: Hero2
   m_TagString: Untagged
@@ -4041,38 +3834,6 @@ Transform:
   m_Father: {fileID: 223689057}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2089719041
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2089719039}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9bafc936ce47424395ba02ed65efe77, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pureDamage: 0
-  pureHealth: 0
-  pureSpeed: 0
-  heroClass: 3
-  damage: 5
-  health: 10
-  speed: 5
-  ownerID: 2
-  team: 1
-  oppositeTeam: 0
-  position: 2
-  prefab: {fileID: 0}
-  healthBar: {fileID: 0}
-  collider: {fileID: 0}
-  turnDoneIndicator: {fileID: 0}
-  turnInProcessIndicator: {fileID: 0}
-  selector: {fileID: 0}
-  isTargeted: 0
-  skillNames: 030000000400000005000000
-  skillList: []
 --- !u!1 &2124055212
 GameObject:
   m_ObjectHideFlags: 0
@@ -4082,7 +3843,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2124055213}
-  - component: {fileID: 2124055214}
   m_Layer: 0
   m_Name: Hero3
   m_TagString: Untagged
@@ -4104,35 +3864,3 @@ Transform:
   m_Father: {fileID: 223689057}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2124055214
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2124055212}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d9bafc936ce47424395ba02ed65efe77, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pureDamage: 0
-  pureHealth: 0
-  pureSpeed: 0
-  heroClass: 5
-  damage: 5
-  health: 10
-  speed: 3
-  ownerID: 2
-  team: 1
-  oppositeTeam: 0
-  position: 3
-  prefab: {fileID: 0}
-  healthBar: {fileID: 0}
-  collider: {fileID: 0}
-  turnDoneIndicator: {fileID: 0}
-  turnInProcessIndicator: {fileID: 0}
-  selector: {fileID: 0}
-  isTargeted: 0
-  skillNames: 090000000a0000000b000000
-  skillList: []

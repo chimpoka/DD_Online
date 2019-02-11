@@ -13,7 +13,7 @@ public class BattleState_TurnAfterSkillSelected : BattleState
         // Select hero
         if (Input.GetMouseButtonDown(0))
         {
-            Hero hero = getHeroByRaycast();
+            var hero = getHeroByRaycast();
             if (hero != null && hero.isTargeted)
             {
                 targetHero = hero;

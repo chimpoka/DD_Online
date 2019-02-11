@@ -11,5 +11,7 @@ public abstract class GameState
         this.game = game;
     }
 
+
+
     public virtual void update() {}
 }

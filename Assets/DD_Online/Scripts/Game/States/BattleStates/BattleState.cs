@@ -7,11 +7,11 @@ public abstract class BattleState
     public GameState_Battle battle;
 
     public Skill selectedSkill;
-    public Hero targetHero;
+    public BattleHero targetHero;
     public GameObject skillSelector;
     public List<GameObject> effectIndicators;
-    public List<Hero> heroes;
-    public Hero currentHero;
+    //public List<BattleHero> heroes;
+    public BattleHero currentHero;
     public Skill hoveredSkill;
 
 
@@ -24,7 +24,7 @@ public abstract class BattleState
             this.selectedSkill = state.selectedSkill;
             this.targetHero = state.targetHero;
             this.skillSelector = state.skillSelector;
-            this.heroes = state.heroes;
+            //this.heroes = state.heroes;
             this.currentHero = state.currentHero;
             this.effectIndicators = state.effectIndicators;
             this.hoveredSkill = state.hoveredSkill;
@@ -85,16 +85,16 @@ public abstract class BattleState
 
 
 
-    public void selectHero(Hero hero)
+    public void selectHero(BattleHero hero)
     {
         if (hero != null)
         {
-            foreach (Hero h in heroes)
+            foreach (var h in battle.heroes)
             {
                 if (h.team == hero.team)
-                    h.setSelected(false);
+                    h.IsSelected = false;
             }
-            hero.setSelected(true);
+            hero.IsSelected = true;
         }
     }
 
@@ -106,6 +106,7 @@ public abstract class BattleState
         {
             if (enableFlag == true)
             {
+                Debug.Log("1");
                 selectedSkill = skill;
                 foreach (Skill s in skill.owner.skillList)
                     s.setSelected(false);
@@ -128,8 +129,8 @@ public abstract class BattleState
     private void setEffectIndicators(Skill skill, bool enableFlag = true)
     {
         destroyEffectIndicators();
-        foreach (Hero hero in heroes)
-            hero.setTargeted(false);
+        //foreach (var hero in battle.heroes)
+        //    hero.IsSelected = false;
 
         if (enableFlag == true)
         {
@@ -137,7 +138,7 @@ public abstract class BattleState
                 return;
 
             string prefabPath = "";
-            Hero.Team targetTeam = Hero.Team.Left;
+            Team targetTeam = Team.Default;
 
             if (skill.targetTeam == TargetTeam.Enemy)
             {
@@ -159,9 +160,9 @@ public abstract class BattleState
                        Quaternion.identity) as GameObject;
                     effectIndicators.Add(prefab);
 
-                    Hero targetHero = getHero(targetTeam, position);
+                    var targetHero = getHero(targetTeam, position);
                     if (targetHero != null)
-                        targetHero.setTargeted(true);
+                        targetHero.isTargeted = true;
                 }
             }
             // self targeted skill
@@ -172,7 +173,7 @@ public abstract class BattleState
                        Quaternion.identity) as GameObject;
                 effectIndicators.Add(prefab);
 
-                currentHero.setTargeted(true);
+                currentHero.isTargeted = true;
             }
         }
     }
@@ -187,9 +188,9 @@ public abstract class BattleState
         effectIndicators = new List<GameObject>();
     }
 
-    private Hero getHero(Hero.Team team, int position)
+    private BattleHero getHero(Team team, int position)
     {
-        foreach (Hero hero in heroes)
+        foreach (var hero in battle.heroes)
         {
             if (hero.team == team && hero.position == position)
                 return hero;
@@ -205,7 +206,7 @@ public abstract class BattleState
         BoxCollider2D collider = (BoxCollider2D)checkHitCollider();
         if (collider != null)
         {
-            foreach (Hero hero in heroes)
+            foreach (var hero in battle.heroes)
             {
                 if (hero.IsSelected == true)
                 {
@@ -221,12 +222,12 @@ public abstract class BattleState
         return null;
     }
 
-    protected Hero getHeroByRaycast()
+    protected BattleHero getHeroByRaycast()
     {
         BoxCollider2D collider = (BoxCollider2D)checkHitCollider();
         if (collider != null)
         {
-            foreach (Hero hero in heroes)
+            foreach (var hero in battle.heroes)
             {
                 if (hero.collider == collider)
                     return hero;

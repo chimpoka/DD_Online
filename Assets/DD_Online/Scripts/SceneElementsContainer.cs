@@ -28,11 +28,11 @@ public class SceneElementsContainer : MonoBehaviour
 
     private void Awake()
     {
-        heroes = new List<Hero>();
-        foreach (Hero hero in heroesTeam1)
-            heroes.Add(hero);
-        foreach (Hero hero in heroesTeam2)
-            heroes.Add(hero);
+        //heroes = new List<Hero>();
+        //foreach (Hero hero in heroesTeam1)
+        //    heroes.Add(hero);
+        //foreach (Hero hero in heroesTeam2)
+        //    heroes.Add(hero);
 
         skillTransforms = new Transform[2][];
         skillTransforms[0] = skillTransforms1;

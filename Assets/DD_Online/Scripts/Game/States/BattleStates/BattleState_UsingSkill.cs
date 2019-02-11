@@ -24,7 +24,7 @@ public class BattleState_UsingSkill : BattleState
                     targetHeroes.Add(currentHero);
                 else if (selectedSkill.multipleTarget == true)
                 {
-                    foreach (Hero hero in heroes)
+                    foreach (var hero in battle.heroes)
                     {
                         if (hero.isTargeted)
                             targetHeroes.Add(hero);
@@ -34,7 +34,7 @@ public class BattleState_UsingSkill : BattleState
                     targetHeroes.Add(targetHero);
 
 
-                foreach (Hero hero in targetHeroes)
+                foreach (var hero in targetHeroes)
                 {
                     // TODO: rework with handlers and lambdas
                     if (effect.type == SkillType.Attack)
